@@ -1,0 +1,59 @@
+@use "mixins" as *;
+@use "media" as *;
+
+.page {
+  @include flex(column, flex-start, stretch, 24px);
+}
+
+.header {
+  @include flex(row, space-between, flex-start, 16px);
+
+  @include sm {
+    flex-direction: column;
+  }
+}
+
+.headerInfo {
+  @include flex(column, flex-start, flex-start, 6px);
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin: 0;
+  max-width: 480px;
+}
+
+.countPill {
+  @include pill(var(--color-primary-soft), var(--color-primary-dark));
+  flex-shrink: 0;
+}
+
+.countDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-primary);
+}
+
+.grid {
+  @include flex(column, flex-start, stretch, 24px);
+}
+
+.cardRow {
+  display: grid;
+  grid-template-columns: minmax(0, 400px) minmax(0, 1fr);
+  gap: 24px;
+  align-items: stretch;
+
+  @include md {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

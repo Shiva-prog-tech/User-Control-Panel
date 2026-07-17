@@ -1,0 +1,81 @@
+@use "mixins" as *;
+
+.card {
+  @include card(24px);
+  @include flex(column, flex-start, stretch, 18px);
+}
+
+.top {
+  @include flex(row, space-between, flex-start, 12px);
+}
+
+.identity {
+  @include flex(row, flex-start, center, 14px);
+  min-width: 0;
+}
+
+.iconChip {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--color-navy);
+  @include flex(row, center, center);
+}
+
+.nameBlock {
+  @include flex(column, flex-start, flex-start, 2px);
+  min-width: 0;
+}
+
+.name {
+  max-width: 100%;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text);
+  @include ellipsis;
+}
+
+.accountNumber {
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.pillReward {
+  @include pill(var(--color-primary-soft), var(--color-primary-dark));
+  flex-shrink: 0;
+  font-size: 12px;
+}
+
+.pillPlatform {
+  @include pill(var(--color-purple-soft), var(--color-purple));
+  flex-shrink: 0;
+  font-size: 12px;
+}
+
+.pillDefault {
+  @include pill(rgba(15, 30, 66, 0.06), var(--color-navy));
+  flex-shrink: 0;
+  font-size: 12px;
+}
+
+.balanceBlock {
+  @include flex(column, flex-start, flex-start, 4px);
+}
+
+.balanceLabel {
+  @include mutedLabel;
+}
+
+.balance {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--color-text);
+}
+
+.footer {
+  @include flex(row, flex-start, center, 10px);
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border);
+}

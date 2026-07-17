@@ -1,0 +1,64 @@
+@use "mixins" as *;
+
+.card {
+  @include card;
+  min-width: 0;
+}
+
+.head {
+  @include flex(row, space-between, baseline, 12px);
+}
+
+.title {
+  margin: 0;
+  @include sectionTitle;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.legend {
+  @include flex(row, flex-start, center, 16px);
+  margin: 12px 0 8px;
+}
+
+.legendItem {
+  @include flex(row, flex-start, center, 6px);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.dotSpending,
+.dotIncome {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+.dotSpending {
+  background: #10b981;
+}
+
+.dotIncome {
+  background: #8b5cf6;
+}
+
+.chartWrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.chart {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.axisLabel {
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--color-text-muted);
+}

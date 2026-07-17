@@ -1,0 +1,37 @@
+@use "mixins" as *;
+@use "media" as *;
+
+.dashboard {
+  @include flex(column, flex-start, stretch, 20px);
+}
+
+.topGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+
+  @include lg {
+    grid-template-columns: 1fr;
+  }
+}
+
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+
+  @include md {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bottomGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  align-items: start;
+
+  @include lg {
+    grid-template-columns: 1fr;
+  }
+}

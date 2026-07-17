@@ -1,0 +1,113 @@
+@use "mixins" as *;
+
+.card {
+  position: relative;
+  aspect-ratio: 1.6;
+  width: 100%;
+  border-radius: 16px;
+  padding: 24px;
+  color: #ffffff;
+  overflow: hidden;
+  @include flex(column, space-between, stretch, 0);
+  box-shadow: 0 12px 30px rgba(15, 30, 66, 0.22);
+}
+
+.visa {
+  background: linear-gradient(
+    135deg,
+    var(--color-navy) 0%,
+    var(--color-navy-light) 55%,
+    #24407e 100%
+  );
+}
+
+.mastercard {
+  background: linear-gradient(135deg, #4c1d95 0%, #6d28d9 55%, var(--color-purple) 100%);
+}
+
+.topRow {
+  @include flex(row, space-between, center, 12px);
+}
+
+.kind {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.visaWordmark {
+  font-size: 20px;
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: 0.04em;
+}
+
+.mcWordmark {
+  @include flex(row, flex-end, center, 8px);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+
+  svg {
+    display: block;
+  }
+}
+
+.chip {
+  width: 42px;
+  height: 30px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #f3d27a 0%, #d8a944 100%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.number {
+  font-family: "Courier New", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  white-space: nowrap;
+}
+
+.bottomRow {
+  @include flex(row, space-between, flex-end, 16px);
+}
+
+.field {
+  @include flex(column, flex-start, flex-start, 4px);
+
+  &:last-child {
+    align-items: flex-end;
+  }
+}
+
+.fieldLabel {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.fieldValue {
+  font-size: 14px;
+  font-weight: 600;
+  @include ellipsis(1);
+}
+
+.frozenOverlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: rgba(244, 246, 251, 0.35);
+  backdrop-filter: blur(3px);
+  @include flex(row, center, center, 0);
+}
+
+.frozenPill {
+  @include pill(rgba(15, 30, 66, 0.8), #ffffff);
+  letter-spacing: 0.14em;
+  font-size: 12px;
+}

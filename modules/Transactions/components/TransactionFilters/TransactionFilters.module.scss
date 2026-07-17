@@ -1,0 +1,59 @@
+@use "mixins" as *;
+@use "media" as *;
+
+.filters {
+  @include flex(row, flex-start, center, 14px);
+  flex-wrap: wrap;
+
+  @include sm {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.searchWrap {
+  position: relative;
+  flex: 1;
+  min-width: 240px;
+
+  @include sm {
+    min-width: 0;
+  }
+}
+
+.searchIcon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.searchInput {
+  @include inputField;
+  padding-left: 42px;
+}
+
+.selectWrap {
+  position: relative;
+  width: 170px;
+
+  @include sm {
+    width: 100%;
+  }
+}
+
+.select {
+  @include inputField;
+  appearance: none;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+.selectIcon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}

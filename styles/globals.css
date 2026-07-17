@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary: #10b981;
+  --color-primary-dark: #0d9488;
+  --color-primary-soft: #d9f6ec;
+  --color-navy: #0f1e42;
+  --color-navy-light: #182b5c;
+  --color-bg: #f4f6fb;
+  --color-surface: #ffffff;
+  --color-border: #e6e9f0;
+  --color-text: #16203a;
+  --color-text-muted: #7a869c;
+  --color-purple: #8b5cf6;
+  --color-purple-soft: #efeafe;
+  --color-warning: #f59e0b;
+  --color-warning-soft: #fdf3e0;
+  --color-danger: #ef4444;
+  --color-danger-soft: #fdecec;
+
+  --radius-card: 14px;
+  --radius-pill: 999px;
+  --shadow-card: 0 1px 3px rgba(15, 30, 66, 0.06);
+  --shadow-popup: 0 20px 50px rgba(15, 30, 66, 0.25);
+
+  --sidebar-width: 264px;
+  --header-height: 76px;
+
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c6cede;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}

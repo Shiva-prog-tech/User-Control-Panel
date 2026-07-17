@@ -1,0 +1,75 @@
+@use "mixins" as *;
+
+.button {
+  @include flex(row, center, center, 8px);
+  padding: 13px 22px;
+  border: none;
+  border-radius: 11px;
+  font-size: 14.5px;
+  font-weight: 600;
+  transition: filter 0.15s ease, background 0.15s ease, transform 0.05s ease;
+
+  &:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.primary {
+  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: #ffffff;
+
+  &:hover:not(:disabled) {
+    filter: brightness(1.05);
+  }
+}
+
+.secondary {
+  background: #eef1f7;
+  color: var(--color-text);
+
+  &:hover:not(:disabled) {
+    background: #e2e7f0;
+  }
+}
+
+.ghost {
+  background: transparent;
+  color: var(--color-primary-dark);
+
+  &:hover:not(:disabled) {
+    background: var(--color-primary-soft);
+  }
+}
+
+.danger {
+  background: var(--color-danger);
+  color: #ffffff;
+
+  &:hover:not(:disabled) {
+    filter: brightness(1.05);
+  }
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.spinner {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #ffffff;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

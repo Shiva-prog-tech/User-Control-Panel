@@ -1,0 +1,49 @@
+@use "mixins" as *;
+
+.tableWrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+    @include mutedLabel;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--color-border);
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 15px 16px;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 14px;
+    color: var(--color-text);
+    white-space: nowrap;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  tbody tr {
+    transition: background 0.12s ease;
+
+    &:hover {
+      background: #f7f9fc;
+    }
+  }
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.empty {
+  @include flex(row, center, center);
+  padding: 48px 16px;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}

@@ -1,0 +1,93 @@
+@use "mixins" as *;
+
+.card {
+  @include card;
+  align-self: flex-start;
+}
+
+.head {
+  @include flex(row, flex-start, center, 12px);
+  margin-bottom: 18px;
+}
+
+.iconBadge {
+  @include flex(row, center, center);
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--color-primary-soft);
+  flex-shrink: 0;
+}
+
+.cardTitle {
+  margin: 0;
+  @include sectionTitle;
+}
+
+.cardSubtitle {
+  margin: 2px 0 0;
+  font-size: 13.5px;
+  color: var(--color-text-muted);
+}
+
+.successBanner {
+  @include flex(row, flex-start, center, 8px);
+  padding: 12px 14px;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  background: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.errorBanner {
+  padding: 12px 14px;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.form {
+  @include flex(column, flex-start, stretch, 16px);
+}
+
+.field {
+  @include flex(column, flex-start, stretch, 6px);
+}
+
+.label {
+  @include mutedLabel;
+}
+
+.select {
+  @include inputField;
+  cursor: pointer;
+}
+
+.amountWrap {
+  position: relative;
+}
+
+.prefix {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.amountInput {
+  @include inputField;
+  padding-left: 32px;
+}
+
+.noteInput {
+  @include inputField;
+}

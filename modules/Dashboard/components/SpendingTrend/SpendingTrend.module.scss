@@ -1,0 +1,74 @@
+@use "mixins" as *;
+@use "media" as *;
+
+.card {
+  @include card;
+  min-width: 0;
+}
+
+.head {
+  margin-bottom: 16px;
+}
+
+.title {
+  margin: 0;
+  @include sectionTitle;
+}
+
+.subtitle {
+  margin: 3px 0 0;
+  font-size: 13.5px;
+  color: var(--color-text-muted);
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 18px;
+
+  @include sm {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tile {
+  @include flex(column, center, flex-start, 6px);
+  padding: 16px 18px;
+  border-radius: 12px;
+  background: #f5f7fb;
+  border: 1px solid var(--color-border);
+}
+
+.tileLabel {
+  @include mutedLabel;
+}
+
+.tileValue {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.chartWrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.chart {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.axisLabel {
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--color-text-muted);
+}
+
+.maxLabel {
+  font-size: 11px;
+  font-weight: 600;
+  fill: #9aa8c2;
+}

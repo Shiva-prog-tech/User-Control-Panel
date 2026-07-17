@@ -1,0 +1,148 @@
+@use "mixins" as *;
+@use "media" as *;
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--sidebar-width);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px 20px;
+  background: linear-gradient(180deg, var(--color-navy) 0%, var(--color-navy-light) 100%);
+  color: #dbe4f7;
+  overflow-y: auto;
+  @include hideScrollbar;
+  z-index: 40;
+
+  @include lg {
+    display: none;
+  }
+}
+
+.brand {
+  @include flex(row, flex-start, center, 12px);
+  padding: 0 8px 24px;
+}
+
+.brandText {
+  @include flex(column, center, flex-start, 2px);
+}
+
+.brandName {
+  font-size: 19px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.brandTag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.menuLabel {
+  @include mutedLabel;
+  color: #6d7ea6;
+  padding: 0 12px 10px;
+}
+
+.nav {
+  @include flex(column, flex-start, stretch, 4px);
+}
+
+.navItem {
+  @include flex(row, flex-start, center, 12px);
+  padding: 11px 12px;
+  border-radius: 10px;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #b9c6e4;
+  transition: background 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+  }
+}
+
+.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 18px 8px;
+}
+
+.footer {
+  margin-top: auto;
+  padding-top: 24px;
+  @include flex(column, flex-start, stretch, 10px);
+}
+
+.userCard {
+  @include flex(row, flex-start, center, 10px);
+  padding: 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.avatar {
+  @include flex(row, center, center);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--color-purple);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.userMeta {
+  @include flex(column, center, flex-start, 2px);
+  min-width: 0;
+  flex: 1;
+}
+
+.userName {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.userEmail {
+  font-size: 12px;
+  color: #93a3c7;
+  max-width: 140px;
+  @include ellipsis;
+}
+
+.signOut {
+  @include flex(row, center, center, 8px);
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: #b9c6e4;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background: rgba(239, 68, 68, 0.14);
+    color: #ffb4b4;
+  }
+}

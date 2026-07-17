@@ -1,0 +1,41 @@
+@use "mixins" as *;
+@use "media" as *;
+
+.transfers {
+  @include flex(column, flex-start, stretch, 24px);
+}
+
+.pageHead {
+  @include flex(column, flex-start, flex-start, 4px);
+}
+
+.eyebrow {
+  @include mutedLabel;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+  align-items: start;
+
+  @include lg {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sideColumn {
+  @include flex(column, flex-start, stretch, 24px);
+  min-width: 0;
+}

@@ -1,0 +1,32 @@
+@use "mixins" as *;
+@use "media" as *;
+
+.page {
+  @include flex(column, flex-start, stretch, 24px);
+}
+
+.header {
+  @include flex(column, flex-start, flex-start, 4px);
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 24px;
+  align-items: start;
+
+  @include lg {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,60 @@
+@use "mixins" as *;
+@use "media" as *;
+
+.card {
+  @include card;
+}
+
+.title {
+  margin: 0;
+  @include sectionTitle;
+}
+
+.subtitle {
+  margin: 3px 0 18px;
+  font-size: 13.5px;
+  color: var(--color-text-muted);
+}
+
+.form {
+  @include flex(column, flex-start, stretch, 16px);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+
+  @include sm {
+    grid-template-columns: 1fr;
+  }
+}
+
+.field {
+  @include flex(column, flex-start, stretch, 6px);
+}
+
+.label {
+  @include mutedLabel;
+}
+
+.input {
+  @include inputField;
+}
+
+.inputReadOnly {
+  @include inputField;
+  background: #f4f6fb;
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+.actions {
+  @include flex(row, flex-start, center, 12px);
+}
+
+.savedNote {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+}

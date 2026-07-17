@@ -1,0 +1,31 @@
+@use "mixins" as *;
+@use "media" as *;
+
+.accounts {
+  @include flex(column, flex-start, stretch, 24px);
+}
+
+.header {
+  @include flex(column, flex-start, flex-start, 4px);
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+
+  @include sm {
+    grid-template-columns: 1fr;
+  }
+}

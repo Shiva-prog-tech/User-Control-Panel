@@ -1,0 +1,50 @@
+@use "mixins" as *;
+@use "media" as *;
+
+.transactions {
+  @include flex(column, flex-start, stretch, 24px);
+}
+
+.header {
+  @include flex(row, space-between, flex-end, 16px);
+
+  @include sm {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.kicker {
+  @include mutedLabel;
+}
+
+.title {
+  margin: 6px 0 4px;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.countPill {
+  @include pill(var(--color-primary-soft), var(--color-primary-dark));
+  white-space: nowrap;
+}
+
+.card {
+  @include card(24px);
+  @include flex(column, flex-start, stretch, 20px);
+
+  @include sm {
+    padding: 16px;
+  }
+}
+
+.refetching {
+  @include flex(row, center, center);
+  padding: 48px 16px;
+}

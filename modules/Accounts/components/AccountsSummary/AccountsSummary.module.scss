@@ -1,0 +1,67 @@
+@use "mixins" as *;
+@use "media" as *;
+
+.summary {
+  position: relative;
+  overflow: hidden;
+  padding: 32px;
+  border-radius: var(--radius-card);
+  background: linear-gradient(
+    135deg,
+    var(--color-navy) 0%,
+    var(--color-navy-light) 100%
+  );
+  box-shadow: var(--shadow-card);
+
+  @include sm {
+    padding: 24px;
+  }
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  @include flex(column, flex-start, flex-start, 10px);
+}
+
+.label {
+  @include mutedLabel;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.total {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #ffffff;
+
+  @include sm {
+    font-size: 32px;
+  }
+}
+
+.count {
+  @include pill(rgba(16, 185, 129, 0.16), var(--color-primary));
+  font-size: 12px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-primary);
+}
+
+.decor {
+  position: absolute;
+  top: 50%;
+  right: -30px;
+  transform: translateY(-50%);
+  width: 260px;
+  height: 260px;
+  pointer-events: none;
+
+  @include md {
+    display: none;
+  }
+}

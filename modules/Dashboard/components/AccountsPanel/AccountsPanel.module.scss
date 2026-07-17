@@ -1,0 +1,75 @@
+@use "mixins" as *;
+
+.card {
+  @include card;
+}
+
+.head {
+  @include flex(row, space-between, center, 12px);
+  margin-bottom: 12px;
+}
+
+.title {
+  margin: 0;
+  @include sectionTitle;
+}
+
+.viewAll {
+  @include flex(row, flex-end, center, 4px);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--color-text);
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--color-primary-dark);
+  }
+}
+
+.list {
+  @include flex(column, flex-start, stretch, 4px);
+}
+
+.row {
+  @include flex(row, flex-start, center, 12px);
+  padding: 12px 8px;
+  border-radius: 12px;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: #f4f7fb;
+  }
+}
+
+.iconChip {
+  @include flex(row, center, center);
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: #eef1f7;
+  flex-shrink: 0;
+}
+
+.meta {
+  @include flex(column, center, flex-start, 2px);
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.type {
+  @include mutedLabel;
+  font-size: 10.5px;
+}
+
+.balance {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
+}

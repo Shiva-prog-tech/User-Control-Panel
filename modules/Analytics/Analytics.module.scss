@@ -1,0 +1,34 @@
+@use "mixins" as *;
+@use "media" as *;
+
+.analytics {
+  @include flex(column, flex-start, stretch, 24px);
+}
+
+.header {
+  @include flex(column, flex-start, flex-start, 4px);
+}
+
+.title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 24px;
+  align-items: start;
+
+  @include lg {
+    grid-template-columns: 1fr;
+  }
+}

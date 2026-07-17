@@ -1,0 +1,6 @@
+@use "mixins" as *;
+
+.page {
+  max-width: 720px;
+  @include flex(column, flex-start, stretch, 20px);
+}

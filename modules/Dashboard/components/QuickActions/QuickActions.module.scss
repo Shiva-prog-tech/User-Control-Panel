@@ -1,0 +1,61 @@
+@use "mixins" as *;
+
+.card {
+  @include card;
+}
+
+.head {
+  @include flex(row, flex-start, center, 10px);
+  margin-bottom: 14px;
+}
+
+.title {
+  margin: 0;
+  @include sectionTitle;
+}
+
+.list {
+  @include flex(column, flex-start, stretch, 6px);
+}
+
+.action {
+  @include flex(row, flex-start, center, 14px);
+  width: 100%;
+  padding: 13px 12px;
+  border: none;
+  border-radius: 12px;
+  background: transparent;
+  text-align: left;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: #f4f7fb;
+  }
+}
+
+.chip {
+  @include flex(row, center, center);
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.chipTeal {
+  background: var(--color-primary-soft);
+}
+
+.chipPurple {
+  background: var(--color-purple-soft);
+}
+
+.chipIndigo {
+  background: #e5e9fd;
+}
+
+.label {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text);
+}

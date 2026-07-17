@@ -1,0 +1,81 @@
+@use "mixins" as *;
+
+.card {
+  @include card;
+}
+
+.title {
+  margin: 0 0 14px;
+  @include sectionTitle;
+}
+
+.empty {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--color-text-muted);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  @include flex(column, flex-start, stretch, 2px);
+}
+
+.row {
+  @include flex(row, space-between, center, 12px);
+  padding: 12px 8px;
+  border-bottom: 1px solid var(--color-border);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.meta {
+  @include flex(column, center, flex-start, 2px);
+  min-width: 0;
+}
+
+.name {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.date {
+  font-size: 12.5px;
+  color: var(--color-text-muted);
+}
+
+.right {
+  @include flex(column, center, flex-end, 4px);
+}
+
+.amount {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.statusPill {
+  @include pill(#eef1f7, var(--color-text-muted));
+  font-size: 10.5px;
+  padding: 3px 10px;
+}
+
+.statusCompleted {
+  background: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+}
+
+.statusPending {
+  background: var(--color-warning-soft);
+  color: #b47409;
+}
+
+.statusFailed {
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+}

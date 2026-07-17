@@ -1,0 +1,70 @@
+@use "mixins" as *;
+@use "media" as *;
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 30, 66, 0.45);
+  backdrop-filter: blur(2px);
+  @include flex(row, center, center);
+  padding: 20px;
+  z-index: 100;
+}
+
+.dialog {
+  width: 100%;
+  background: var(--color-surface);
+  border-radius: 18px;
+  box-shadow: var(--shadow-popup);
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  animation: popIn 0.18s ease;
+}
+
+.head {
+  @include flex(row, space-between, flex-start, 16px);
+  padding: 22px 24px 0;
+}
+
+.title {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  font-size: 13.5px;
+  color: var(--color-text-muted);
+}
+
+.close {
+  @include flex(row, center, center);
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 10px;
+  background: #f1f4f9;
+  flex-shrink: 0;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: #e4e9f2;
+  }
+}
+
+.body {
+  padding: 20px 24px 24px;
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

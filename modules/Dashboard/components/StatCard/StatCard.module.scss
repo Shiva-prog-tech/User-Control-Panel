@@ -1,0 +1,54 @@
+@use "mixins" as *;
+
+.card {
+  @include card(22px);
+  @include flex(row, space-between, center, 12px);
+  border-left: 4px solid var(--color-border);
+}
+
+.meta {
+  @include flex(column, center, flex-start, 8px);
+}
+
+.label {
+  @include mutedLabel;
+}
+
+.value {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+}
+
+.iconChip {
+  @include flex(row, center, center);
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  flex-shrink: 0;
+}
+
+.accentTeal {
+  border-left-color: var(--color-primary);
+
+  .iconChip {
+    background: var(--color-primary-soft);
+  }
+}
+
+.accentPurple {
+  border-left-color: var(--color-purple);
+
+  .iconChip {
+    background: var(--color-purple-soft);
+  }
+}
+
+.accentAmber {
+  border-left-color: var(--color-warning);
+
+  .iconChip {
+    background: var(--color-warning-soft);
+  }
+}

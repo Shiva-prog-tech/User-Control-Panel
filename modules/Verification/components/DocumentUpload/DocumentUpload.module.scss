@@ -1,0 +1,81 @@
+@use "mixins" as *;
+
+.card {
+  @include card;
+  align-self: flex-start;
+}
+
+.title {
+  margin: 0;
+  @include sectionTitle;
+}
+
+.subtitle {
+  margin: 4px 0 16px;
+  font-size: 13.5px;
+  color: var(--color-text-muted);
+}
+
+.successBanner {
+  padding: 12px 14px;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  background: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.empty {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--color-text-muted);
+}
+
+.form {
+  @include flex(column, flex-start, stretch, 16px);
+}
+
+.field {
+  @include flex(column, flex-start, stretch, 6px);
+}
+
+.label {
+  @include mutedLabel;
+}
+
+.select {
+  @include inputField;
+  cursor: pointer;
+}
+
+.dropZone {
+  @include flex(column, center, center, 4px);
+  padding: 26px 16px;
+  border: 1.5px dashed #c2ccdd;
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.15s ease, background 0.15s ease;
+
+  &:hover {
+    border-color: var(--color-primary);
+    background: #f7fdfb;
+  }
+}
+
+.fileInput {
+  display: none;
+}
+
+.dropTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+  word-break: break-all;
+}
+
+.dropHint {
+  font-size: 12.5px;
+  color: var(--color-text-muted);
+}

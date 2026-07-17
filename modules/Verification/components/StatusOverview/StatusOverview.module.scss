@@ -1,0 +1,98 @@
+@use "mixins" as *;
+@use "media" as *;
+
+.card {
+  border-radius: 16px;
+  padding: 26px 28px;
+  background: linear-gradient(120deg, var(--color-navy) 0%, var(--color-navy-light) 100%);
+  color: #ffffff;
+  @include flex(column, flex-start, stretch, 22px);
+}
+
+.top {
+  @include flex(row, space-between, center, 16px);
+
+  @include sm {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.identity {
+  @include flex(row, flex-start, center, 14px);
+}
+
+.iconChip {
+  @include flex(row, center, center);
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+.headings {
+  @include flex(column, center, flex-start, 3px);
+}
+
+.label {
+  @include mutedLabel;
+  color: #93a3c7;
+}
+
+.title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.pillCompleted {
+  @include pill(rgba(16, 185, 129, 0.18), #4ade9d);
+}
+
+.pillInReview {
+  @include pill(rgba(96, 165, 250, 0.18), #93c5fd);
+}
+
+.pillActionRequired {
+  @include pill(rgba(245, 158, 11, 0.18), #fcd34d);
+}
+
+.pillNotStarted {
+  @include pill(rgba(255, 255, 255, 0.1), #b9c6e4);
+}
+
+.progress {
+  @include flex(column, flex-start, stretch, 8px);
+}
+
+.progressMeta {
+  @include flex(row, space-between, center);
+}
+
+.progressText {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #dbe4f7;
+}
+
+.progressPercent {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.track {
+  height: 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.fill {
+  height: 100%;
+  border-radius: 8px;
+  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  transition: width 0.3s ease;
+}

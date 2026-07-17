@@ -1,0 +1,59 @@
+@use "mixins" as *;
+@use "media" as *;
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+
+  @include md {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tile {
+  @include card(20px);
+  @include flex(row, space-between, center, 16px);
+  border-left: 4px solid transparent;
+}
+
+.spent {
+  border-left-color: var(--color-primary);
+}
+
+.income {
+  border-left-color: var(--color-purple);
+}
+
+.info {
+  @include flex(column, flex-start, flex-start, 6px);
+  min-width: 0;
+}
+
+.label {
+  @include mutedLabel;
+}
+
+.value {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--color-navy);
+  @include ellipsis;
+  max-width: 100%;
+}
+
+.chip {
+  @include flex(row, center, center);
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.tealChip {
+  background: var(--color-primary-soft);
+}
+
+.purpleChip {
+  background: var(--color-purple-soft);
+}
