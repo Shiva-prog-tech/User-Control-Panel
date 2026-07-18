@@ -9,6 +9,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@amcharts/amcharts5": "^5.19.1",
     "@reduxjs/toolkit": "^2.5.0",
     "axios": "^1.7.9",
     "next": "^16.0.0",

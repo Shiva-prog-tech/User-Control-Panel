@@ -1,106 +1,131 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+import * as am5 from "@amcharts/amcharts5";
+import * as am5xy from "@amcharts/amcharts5/xy";
+import LivePill from "@/Components/LivePill";
+import { createSwipeoRoot } from "@/libs/amchartsTheme";
 import { MonthlyComparisonPoint } from "@/types/global";
-import { formatCurrency } from "@/utils/helper";
 import styles from "./MonthlyComparison.module.scss";
 
 interface MonthlyComparisonProps {
   data: MonthlyComparisonPoint[];
 }
 
-const CHART_WIDTH = 520;
-const CHART_HEIGHT = 220;
-const PADDING_BOTTOM = 28;
-const BAR_WIDTH = 18;
-const BAR_GAP = 6;
-
+// Clustered columns, rounded tops, animated rise — spending vs income.
 const MonthlyComparison = ({ data }: MonthlyComparisonProps) => {
-  const max = Math.max(
-    1,
-    ...data.map((point) => Math.max(point.spending, point.income))
-  );
-  const plotHeight = CHART_HEIGHT - PADDING_BOTTOM;
-  const groupWidth = CHART_WIDTH / Math.max(1, data.length);
+  const chartRef = useRef<HTMLDivElement>(null);
 
-  const barHeight = (value: number) =>
-    Math.max(2, (value / max) * (plotHeight - 12));
+  useEffect(() => {
+    const element = chartRef.current;
+    if (!element || data.length === 0) return;
+
+    const chartData = data.map((point) => ({ ...point }));
+    const root = createSwipeoRoot(element);
+
+    const chart = root.container.children.push(
+      am5xy.XYChart.new(root, {
+        panX: false,
+        panY: false,
+        wheelX: "none",
+        wheelY: "none",
+        paddingLeft: 0,
+        paddingRight: 4,
+        layout: root.verticalLayout,
+      })
+    );
+    chart.zoomOutButton.set("forceHidden", true);
+
+    const xRenderer = am5xy.AxisRendererX.new(root, {
+      minGridDistance: 24,
+      cellStartLocation: 0.15,
+      cellEndLocation: 0.85,
+    });
+    xRenderer.grid.template.setAll({ visible: false });
+    const xAxis = chart.xAxes.push(
+      am5xy.CategoryAxis.new(root, {
+        categoryField: "month",
+        renderer: xRenderer,
+      })
+    );
+    xAxis.data.setAll(chartData);
+
+    const yAxis = chart.yAxes.push(
+      am5xy.ValueAxis.new(root, {
+        min: 0,
+        extraMax: 0.1,
+        numberFormat: "'$'#a",
+        renderer: am5xy.AxisRendererY.new(root, {}),
+      })
+    );
+
+    const makeSeries = (name: string, field: string, colorHex: number) => {
+      const series = chart.series.push(
+        am5xy.ColumnSeries.new(root, {
+          name,
+          xAxis,
+          yAxis,
+          valueYField: field,
+          categoryXField: "month",
+          fill: am5.color(colorHex),
+          stroke: am5.color(colorHex),
+          tooltip: am5.Tooltip.new(root, {
+            labelText: "{name} · {categoryX}: {valueY.formatNumber('$#,###.00')}",
+          }),
+        })
+      );
+      series.columns.template.setAll({
+        cornerRadiusTL: 6,
+        cornerRadiusTR: 6,
+        maxWidth: 26,
+        strokeOpacity: 0,
+        width: am5.percent(88),
+      });
+      series.data.setAll(chartData);
+      series.appear(1000);
+      return series;
+    };
+
+    makeSeries("Spending", "spending", 0x10b981);
+    makeSeries("Income", "income", 0x8b5cf6);
+
+    const legend = chart.children.push(
+      am5.Legend.new(root, {
+        centerX: am5.percent(50),
+        x: am5.percent(50),
+        marginTop: 10,
+      })
+    );
+    legend.labels.template.setAll({
+      fontSize: 12.5,
+      fontWeight: "600",
+      fill: am5.color(0x1d1d1f),
+    });
+    legend.markers.template.setAll({ width: 10, height: 10 });
+    legend.markerRectangles.template.setAll({
+      cornerRadiusTL: 3,
+      cornerRadiusTR: 3,
+      cornerRadiusBL: 3,
+      cornerRadiusBR: 3,
+    });
+    legend.data.setAll(chart.series.values);
+
+    chart.appear(1000, 100);
+
+    return () => root.dispose();
+  }, [data]);
 
   return (
     <section className={styles.card}>
       <div className={styles.head}>
-        <h2 className={styles.title}>Monthly comparison</h2>
-        <span className={styles.subtitle}>Last 6 months</span>
+        <div>
+          <h2 className={styles.title}>Monthly comparison</h2>
+          <span className={styles.subtitle}>Last 6 months</span>
+        </div>
+        <LivePill />
       </div>
 
-      <div className={styles.legend}>
-        <span className={styles.legendItem}>
-          <span className={styles.dotSpending} />
-          Spending
-        </span>
-        <span className={styles.legendItem}>
-          <span className={styles.dotIncome} />
-          Income
-        </span>
-      </div>
-
-      <div className={styles.chartWrap}>
-        <svg
-          viewBox={`0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`}
-          className={styles.chart}
-          role="img"
-          aria-label={`Monthly spending vs income, peak ${formatCurrency(max)}`}
-        >
-          <line
-            x1="0"
-            y1={plotHeight}
-            x2={CHART_WIDTH}
-            y2={plotHeight}
-            stroke="var(--color-border)"
-            strokeWidth="1"
-          />
-          {data.map((point, index) => {
-            const groupCenter = index * groupWidth + groupWidth / 2;
-            const spendingHeight = barHeight(point.spending);
-            const incomeHeight = barHeight(point.income);
-            return (
-              <g key={point.month}>
-                <rect
-                  x={groupCenter - BAR_WIDTH - BAR_GAP / 2}
-                  y={plotHeight - spendingHeight}
-                  width={BAR_WIDTH}
-                  height={spendingHeight}
-                  rx="4"
-                  fill="#10b981"
-                >
-                  <title>
-                    {point.month} spending: {formatCurrency(point.spending)}
-                  </title>
-                </rect>
-                <rect
-                  x={groupCenter + BAR_GAP / 2}
-                  y={plotHeight - incomeHeight}
-                  width={BAR_WIDTH}
-                  height={incomeHeight}
-                  rx="4"
-                  fill="#8b5cf6"
-                >
-                  <title>
-                    {point.month} income: {formatCurrency(point.income)}
-                  </title>
-                </rect>
-                <text
-                  x={groupCenter}
-                  y={CHART_HEIGHT - 8}
-                  textAnchor="middle"
-                  className={styles.axisLabel}
-                >
-                  {point.month}
-                </text>
-              </g>
-            );
-          })}
-        </svg>
-      </div>
+      <div ref={chartRef} className={styles.chart} />
     </section>
   );
 };

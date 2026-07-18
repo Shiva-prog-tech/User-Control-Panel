@@ -9,6 +9,7 @@ export interface TransactionFilters {
   type?: TransactionType | "";
   from?: string;
   to?: string;
+  cardId?: string;
 }
 
 // Mock fallback until the API is live.
@@ -123,6 +124,7 @@ const applyFilters = (
   filters: TransactionFilters
 ): Transaction[] => {
   return transactions.filter((txn) => {
+    if (filters.cardId && txn.cardId !== filters.cardId) return false;
     if (filters.status && txn.status !== filters.status) return false;
     if (filters.type && txn.type !== filters.type) return false;
     if (filters.search) {

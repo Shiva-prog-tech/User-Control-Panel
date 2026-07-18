@@ -1,0 +1,43 @@
+.tilt {
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --glare-x: 50%;
+  --glare-y: 30%;
+
+  position: relative;
+  min-width: 0;
+  transform: perspective(1000px) rotateX(var(--tilt-y)) rotateY(var(--tilt-x));
+  transform-style: preserve-3d;
+  transition: transform 200ms var(--ease-apple);
+  will-change: transform;
+
+  // The wrapped card fills the wrapper (grids/flex size the wrapper).
+  > :first-child {
+    height: 100%;
+  }
+
+  &:hover .glare {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transform: none;
+    transition: none;
+  }
+}
+
+.glare {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-card);
+  pointer-events: none;
+  background: radial-gradient(
+    360px circle at var(--glare-x) var(--glare-y),
+    rgba(255, 255, 255, 0.55) 0%,
+    rgba(255, 255, 255, 0.08) 42%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 240ms ease;
+  mix-blend-mode: soft-light;
+}

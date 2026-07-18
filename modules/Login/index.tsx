@@ -1,18 +1,7 @@
 "use client";
 
-import AuthBrandPanel from "@/Components/AuthBrandPanel";
-import LoginForm from "./components/LoginForm";
-import styles from "./Login.module.scss";
+import AuthScreen from "@/Components/AuthScreen";
 
-const Login = () => {
-  return (
-    <div className={styles.screen}>
-      <AuthBrandPanel />
-      <div className={styles.formSide}>
-        <LoginForm />
-      </div>
-    </div>
-  );
-};
+const Login = () => <AuthScreen initialMode="signin" />;
 
 export default Login;

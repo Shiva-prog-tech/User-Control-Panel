@@ -1,18 +1,7 @@
 "use client";
 
-import AuthBrandPanel from "@/Components/AuthBrandPanel";
-import SignupForm from "./components/SignupForm";
-import styles from "./Signup.module.scss";
+import AuthScreen from "@/Components/AuthScreen";
 
-const Signup = () => {
-  return (
-    <div className={styles.screen}>
-      <AuthBrandPanel />
-      <div className={styles.formSide}>
-        <SignupForm />
-      </div>
-    </div>
-  );
-};
+const Signup = () => <AuthScreen initialMode="signup" />;
 
 export default Signup;

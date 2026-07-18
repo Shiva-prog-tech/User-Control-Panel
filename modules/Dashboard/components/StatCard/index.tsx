@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import TiltCard from "@/Components/TiltCard";
 import { classNames } from "@/utils/helper";
 import styles from "./StatCard.module.scss";
 
@@ -19,17 +20,19 @@ const ACCENT_CLASS: Record<StatCardProps["accent"], string> = {
 
 const StatCard = ({ label, value, icon, accent }: StatCardProps) => {
   return (
-    <section
-      className={classNames(styles.card, styles[ACCENT_CLASS[accent]])}
-    >
-      <div className={styles.meta}>
-        <span className={styles.label}>{label}</span>
-        <span className={styles.value}>{value}</span>
-      </div>
-      <span className={styles.iconChip}>
-        <Image src={icon} alt="" width={20} height={20} />
-      </span>
-    </section>
+    <TiltCard>
+      <section
+        className={classNames(styles.card, styles[ACCENT_CLASS[accent]])}
+      >
+        <div className={styles.meta}>
+          <span className={styles.label}>{label}</span>
+          <span className={styles.value}>{value}</span>
+        </div>
+        <span className={styles.iconChip}>
+          <Image src={icon} alt="" width={20} height={20} />
+        </span>
+      </section>
+    </TiltCard>
   );
 };
 

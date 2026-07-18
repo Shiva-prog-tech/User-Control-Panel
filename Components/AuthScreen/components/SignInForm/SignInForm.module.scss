@@ -1,0 +1,137 @@
+@use "mixins" as *;
+
+.form {
+  @include flex(column, center, center);
+  width: 100%;
+}
+
+.title {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 800;
+  color: #333c56;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  margin: 6px 0 16px;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.errorBanner {
+  width: 100%;
+  max-width: 380px;
+  padding: 11px 16px;
+  border-radius: 12px;
+  margin-bottom: 6px;
+  background: rgba(253, 236, 236, 0.72);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  color: var(--color-danger);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.optionsRow {
+  width: 100%;
+  max-width: 380px;
+  @include flex(row, space-between, center, 12px);
+  margin: 6px 0 2px;
+}
+
+.remember {
+  @include flex(row, flex-start, center, 8px);
+  font-size: 13.5px;
+  color: var(--color-text);
+  cursor: pointer;
+
+  input {
+    width: 15px;
+    height: 15px;
+    accent-color: #6f63d8;
+    cursor: pointer;
+  }
+}
+
+.forgot {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #6f63d8;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.submit {
+  @include flex(row, center, center, 8px);
+  margin-top: 16px;
+  min-width: 180px;
+  height: 50px;
+  padding: 0 34px;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #6f63d8 0%, #7280ea 100%);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  box-shadow: 0 10px 26px rgba(111, 99, 216, 0.35);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(111, 99, 216, 0.45);
+    filter: brightness(1.04);
+  }
+
+  &:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+}
+
+.spinner {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #ffffff;
+  animation: spin 0.7s linear infinite;
+}
+
+.bottomLine {
+  margin: 16px 0 0;
+  font-size: 14px;
+  color: var(--color-text);
+}
+
+.linkBtn {
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #6f63d8;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.ssl {
+  @include flex(row, center, center, 6px);
+  margin: 14px 0 0;
+  font-size: 12.5px;
+  color: var(--color-text-muted);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

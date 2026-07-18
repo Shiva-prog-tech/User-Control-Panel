@@ -1,9 +1,9 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Button from "@/Components/Button";
+import AuthInput from "@/Components/AuthScreen/components/AuthInput";
 import { forgotPassword } from "@/services/auth.service";
 import { ROUTES } from "@/types/constants";
 import { LockIcon, MailIcon } from "@/utils/ImageRelativePaths";
@@ -15,7 +15,7 @@ const ForgotPasswordForm = () => {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!email.trim()) {
       setError("Enter the email you signed up with.");
@@ -29,9 +29,9 @@ const ForgotPasswordForm = () => {
   };
 
   return (
-    <div className={styles.wrap}>
-      <h1 className={styles.heading}>Reset your password</h1>
-      <p className={styles.subheading}>
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <h1 className={styles.title}>Reset your password</h1>
+      <p className={styles.subtitle}>
         Enter your email and we&apos;ll send you a reset link
       </p>
 
@@ -47,30 +47,24 @@ const ForgotPasswordForm = () => {
             </div>
           )}
 
-          <form className={styles.form} onSubmit={handleSubmit}>
-            <label className={styles.field}>
-              <span className={styles.label}>Email Address</span>
-              <div className={styles.inputWrap}>
-                <Image src={MailIcon} alt="" width={17} height={17} />
-                <input
-                  type="email"
-                  placeholder="you@company.com"
-                  autoComplete="email"
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                />
-              </div>
-            </label>
+          <AuthInput
+            icon={MailIcon}
+            placeholder="Email Address"
+            autoComplete="email"
+            type="email"
+            value={email}
+            onChange={setEmail}
+          />
 
-            <Button type="submit" fullWidth loading={submitting}>
-              Send reset link
-            </Button>
-          </form>
+          <button type="submit" className={styles.submit} disabled={submitting}>
+            {submitting && <span className={styles.spinner} />}
+            Send reset link
+          </button>
         </>
       )}
 
       <p className={styles.backLine}>
-        <Link href={ROUTES.LOGIN} className={styles.inlineLink}>
+        <Link href={ROUTES.LOGIN} className={styles.linkBtn}>
           ← Back to sign in
         </Link>
       </p>
@@ -79,7 +73,7 @@ const ForgotPasswordForm = () => {
         <Image src={LockIcon} alt="" width={13} height={13} />
         256-bit SSL encryption
       </p>
-    </div>
+    </form>
   );
 };
 

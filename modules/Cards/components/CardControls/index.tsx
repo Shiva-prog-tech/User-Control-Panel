@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "@/Components/Button";
 import { updateCardLimit, updateCardStatus } from "@/services/cards.service";
 import { CardStatus } from "@/types/constants";
@@ -52,7 +52,7 @@ const CardControls = ({ card, onCardUpdate }: CardControlsProps) => {
     setFreezing(false);
   };
 
-  const handleLimitChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleLimitChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLimitInput(event.target.value);
     setSaved(false);
   };

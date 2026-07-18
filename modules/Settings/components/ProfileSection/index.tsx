@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "@/Components/Button";
 import Loader from "@/Components/Loader";
 import { useAppDispatch } from "@/redux/hooks";
@@ -35,7 +35,7 @@ const ProfileSection = () => {
     };
   }, []);
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!profile || saving) return;
     setSaving(true);

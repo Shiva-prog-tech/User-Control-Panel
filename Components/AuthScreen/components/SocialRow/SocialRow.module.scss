@@ -1,0 +1,55 @@
+@use "mixins" as *;
+
+.wrap {
+  @include flex(column, center, center, 12px);
+  margin-top: 18px;
+  width: 100%;
+}
+
+.text {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--color-text-muted);
+}
+
+.icons {
+  @include flex(row, center, center, 12px);
+}
+
+.iconBtn {
+  @include flex(row, center, center);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  color: #333c56;
+  @include glass(0.55, 12px);
+  transition: transform 0.3s ease, border-color 0.3s ease,
+    box-shadow 0.3s ease, background 0.3s ease;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.78);
+    border-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 14px 30px rgba(35, 45, 75, 0.16),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+}
+
+// QR toggle in its engaged state — inverted to the auth accent gradient.
+.iconBtnActive {
+  background: linear-gradient(135deg, #6f63d8 0%, #7280ea 100%);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  box-shadow: 0 12px 26px rgba(111, 99, 216, 0.42);
+
+  &:hover {
+    background: linear-gradient(135deg, #6f63d8 0%, #7280ea 100%);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 16px 32px rgba(111, 99, 216, 0.5);
+  }
+}

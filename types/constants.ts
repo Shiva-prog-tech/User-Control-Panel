@@ -16,6 +16,7 @@ export const ROUTES = {
   DASHBOARD: "/dashboard",
   ACCOUNTS: "/accounts",
   CARDS: "/cards",
+  CARD_DETAILS: (id: string) => `/cards/${id}`,
   TRANSFERS: "/transfers",
   TRANSACTIONS: "/transactions",
   ANALYTICS: "/analytics",

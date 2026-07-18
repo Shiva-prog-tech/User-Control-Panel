@@ -1,0 +1,21 @@
+@use "mixins" as *;
+
+.card {
+  @include card;
+  min-width: 0;
+}
+
+.head {
+  @include flex(row, space-between, flex-start, 12px);
+  margin-bottom: 14px;
+}
+
+.title {
+  margin: 0;
+  @include sectionTitle;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: var(--color-text-muted);
+}

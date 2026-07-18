@@ -1,0 +1,346 @@
+@use "mixins" as *;
+@use "media" as *;
+
+// Sliding sign-in / sign-up screen.
+// A 2000px gradient circle (::before) sits off-canvas and sweeps across on
+// mode change; forms slide to the opposite half and cross-fade; the panel
+// copy glides in with staggered delays.
+
+.authScreen {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  // Glassmorphism backdrop: soft out-of-focus color blobs the frosted
+  // surfaces blur against — slate-blue lower left, warm amber/orange right.
+  background-color: #f7f7f8;
+  background-image: radial-gradient(
+      720px 640px at 8% 82%,
+      rgba(96, 114, 128, 0.55) 0%,
+      rgba(96, 114, 128, 0.22) 42%,
+      transparent 68%
+    ),
+    radial-gradient(
+      520px 480px at 30% 55%,
+      rgba(129, 148, 160, 0.28) 0%,
+      transparent 65%
+    ),
+    radial-gradient(
+      760px 680px at 88% 26%,
+      rgba(238, 165, 108, 0.5) 0%,
+      rgba(238, 165, 108, 0.2) 45%,
+      transparent 70%
+    ),
+    radial-gradient(
+      560px 520px at 79% 6%,
+      rgba(245, 205, 122, 0.5) 0%,
+      transparent 68%
+    ),
+    radial-gradient(
+      620px 700px at 97% 78%,
+      rgba(233, 138, 92, 0.42) 0%,
+      transparent 70%
+    );
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    height: 2000px;
+    width: 2000px;
+    top: -10%;
+    right: 48%;
+    transform: translateY(-50%);
+    background-image: radial-gradient(
+        circle at 68% 30%,
+        rgba(255, 255, 255, 0.14) 0%,
+        transparent 45%
+      ),
+      linear-gradient(135deg, #6f63d8 0%, #7280ea 100%);
+    transition: 1.8s ease-in-out;
+    border-radius: 50%;
+    z-index: 6;
+  }
+}
+
+.signUpMode::before {
+  transform: translate(100%, -50%);
+  right: 52%;
+}
+
+.formsContainer {
+  position: absolute;
+  inset: 0;
+}
+
+.signinSignup {
+  position: absolute;
+  top: 50%;
+  left: 75%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  display: grid;
+  grid-template-columns: 1fr;
+  transition: 1s 0.7s ease-in-out;
+  z-index: 5;
+}
+
+.signUpMode .signinSignup {
+  left: 25%;
+}
+
+.formWrap {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  @include flex(column, center, center);
+  padding: 0 4rem;
+  overflow: hidden;
+  transition: opacity 0.2s 0.7s ease;
+
+  @include xl {
+    padding: 0 2rem;
+  }
+}
+
+.signInWrap {
+  z-index: 2;
+  opacity: 1;
+}
+
+.signUpWrap {
+  z-index: 1;
+  opacity: 0;
+}
+
+.signUpMode .signInWrap {
+  opacity: 0;
+  z-index: 1;
+}
+
+.signUpMode .signUpWrap {
+  opacity: 1;
+  z-index: 2;
+}
+
+.panelsContainer {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.panel {
+  @include flex(column, center, center);
+  text-align: center;
+  z-index: 6;
+  padding: 3rem 12%;
+
+  @include xl {
+    padding: 3rem 7%;
+  }
+}
+
+.leftPanel {
+  pointer-events: all;
+}
+
+.rightPanel {
+  pointer-events: none;
+}
+
+.signUpMode .leftPanel {
+  pointer-events: none;
+}
+
+.signUpMode .rightPanel {
+  pointer-events: all;
+}
+
+.panelContent {
+  color: #ffffff;
+  transition: transform 0.9s ease-in-out;
+  transition-delay: 0.6s;
+  @include flex(column, center, center, 12px);
+}
+
+.rightPanel .panelContent {
+  transform: translateX(800px);
+}
+
+.signUpMode .leftPanel .panelContent {
+  transform: translateX(-800px);
+}
+
+.signUpMode .rightPanel .panelContent {
+  transform: translateX(0);
+}
+
+.panelBrand {
+  @include flex(row, center, center, 10px);
+  margin-bottom: 10px;
+
+  span {
+    font-size: 20px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.01em;
+  }
+}
+
+.panelTitle {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.panelText {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 340px;
+}
+
+.panelBtn {
+  margin-top: 14px;
+  min-width: 150px;
+  padding: 12px 30px;
+  background: rgba(255, 255, 255, 0.12);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(255, 255, 255, 0.92);
+  border-radius: 999px;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease,
+    box-shadow 0.3s ease;
+
+  &:hover {
+    background: #ffffff;
+    color: #6f63d8;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(17, 12, 66, 0.22);
+  }
+}
+
+// Short viewports: let the page scroll instead of clipping the forms.
+@media (max-height: 780px) and (min-width: 871px) {
+  .authScreen {
+    min-height: 780px;
+  }
+}
+
+// Vertical layout: gradient band on top (sign in) or bottom (sign up),
+// panels become slim bars, forms sit in the middle.
+@media (max-width: 870px) {
+  .authScreen {
+    min-height: 920px;
+
+    &::before {
+      width: 1500px;
+      height: 1500px;
+      top: initial;
+      right: initial;
+      left: 30%;
+      bottom: 72%;
+      transform: translateX(-50%);
+      transition: 2s ease-in-out;
+    }
+  }
+
+  .signUpMode::before {
+    transform: translate(-50%, 100%);
+    bottom: 28%;
+    right: initial;
+  }
+
+  .signinSignup {
+    width: 100%;
+    left: 50%;
+    top: 62%;
+    transform: translate(-50%, -50%);
+    transition: 1s 0.8s ease-in-out;
+  }
+
+  .signUpMode .signinSignup {
+    left: 50%;
+    top: 45%;
+  }
+
+  .panelsContainer {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 2fr 1fr;
+  }
+
+  .panel {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem 8%;
+    grid-column: 1 / 2;
+  }
+
+  .leftPanel {
+    grid-row: 1 / 2;
+  }
+
+  .rightPanel {
+    grid-row: 3 / 4;
+  }
+
+  .panelContent {
+    gap: 8px;
+    transition-delay: 0.8s;
+  }
+
+  .rightPanel .panelContent {
+    transform: translateY(300px);
+  }
+
+  .signUpMode .leftPanel .panelContent {
+    transform: translateY(-300px);
+  }
+
+  .signUpMode .rightPanel .panelContent {
+    transform: translateY(0);
+  }
+
+  .panelBrand {
+    display: none;
+  }
+
+  .panelTitle {
+    font-size: 20px;
+  }
+
+  .panelText {
+    font-size: 12.5px;
+    max-width: 300px;
+  }
+
+  .panelBtn {
+    min-width: 120px;
+    padding: 9px 20px;
+    font-size: 11px;
+    margin-top: 6px;
+  }
+}
+
+@media (max-width: 570px) {
+  .formWrap {
+    padding: 0 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .authScreen::before,
+  .signinSignup,
+  .formWrap,
+  .panelContent {
+    transition-duration: 0.01s !important;
+    transition-delay: 0s !important;
+  }
+}

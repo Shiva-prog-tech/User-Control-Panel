@@ -8,6 +8,7 @@ const Config = {
   SESSION_TIMEOUT_MINUTES: Number(
     process.env.NEXT_PUBLIC_SESSION_TIMEOUT_MINUTES ?? 30
   ),
+  AMCHARTS_LICENSE: process.env.NEXT_PUBLIC_AMCHARTS_LICENSE ?? "",
 
   STORAGE_KEYS: {
     AUTH_TOKEN: "swipeo_auth_token",

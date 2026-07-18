@@ -4,8 +4,9 @@
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(15, 30, 66, 0.45);
-  backdrop-filter: blur(2px);
+  background: rgba(15, 30, 66, 0.4);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   @include flex(row, center, center);
   padding: 20px;
   z-index: 100;
@@ -13,12 +14,12 @@
 
 .dialog {
   width: 100%;
-  background: var(--color-surface);
+  @include glass(0.85, 24px);
   border-radius: 18px;
   box-shadow: var(--shadow-popup);
   max-height: calc(100vh - 48px);
   overflow-y: auto;
-  animation: popIn 0.18s ease;
+  animation: popIn var(--motion-base) var(--ease-spring) backwards;
 }
 
 .head {
@@ -61,10 +62,16 @@
 @keyframes popIn {
   from {
     opacity: 0;
-    transform: translateY(8px) scale(0.98);
+    transform: translateY(10px) scale(0.97);
   }
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dialog {
+    animation-duration: 0.01s;
   }
 }

@@ -1,0 +1,322 @@
+@use "mixins" as *;
+@use "media" as *;
+
+.page {
+  @include flex(column, flex-start, stretch, 26px);
+}
+
+// ----------------------------------------------------------------- top ----
+
+.topBar {
+  @include flex(row, space-between, flex-start, 16px);
+
+  @include sm {
+    flex-direction: column;
+  }
+}
+
+.topBarInfo {
+  @include flex(column, flex-start, flex-start, 7px);
+}
+
+.backLink {
+  @include flex(row, flex-start, center, 6px);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  transition: color var(--motion-fast) var(--ease-apple),
+    transform var(--motion-fast) var(--ease-apple);
+
+  &:hover {
+    color: var(--color-primary-dark);
+    transform: translateX(-2px);
+  }
+}
+
+.title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text);
+  text-transform: capitalize;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.statusPill {
+  @include pill(#eef1f7, var(--color-text-muted));
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.statusDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.statusActive {
+  background: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+}
+
+.statusFrozen {
+  background: #e3edfb;
+  color: #2f6fce;
+}
+
+.statusBlocked {
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+}
+
+// ---------------------------------------------------------------- hero ----
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: stretch;
+
+  @include lg {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.heroMain {
+  @include flex(column, flex-start, stretch, 24px);
+  min-width: 0;
+}
+
+// Intentionally unboxed — the 3D card floats directly on the page canvas,
+// grounded only by its own animated shadow. flex: 1 lets it absorb whatever
+// height the side panels dictate, keeping the card vertically centred and
+// the stat tiles pinned level with the bottom of the column.
+.stageArea {
+  @include flex(column, center, center, 0);
+  flex: 1;
+  padding: 8px 12px 48px;
+  min-width: 0;
+}
+
+.heroSide {
+  @include flex(column, flex-start, stretch, 24px);
+  min-width: 0;
+}
+
+.overviewPanel {
+  @include card(24px);
+  @include flex(column, flex-start, stretch, 22px);
+}
+
+.panelTitle {
+  @include sectionTitle;
+  margin: 0;
+}
+
+.metaGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 24px;
+  margin: 0;
+
+  @include xs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.metaItem {
+  @include flex(column, flex-start, flex-start, 5px);
+  min-width: 0;
+}
+
+.metaLabel {
+  @include mutedLabel;
+}
+
+.metaValue {
+  margin: 0;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--color-text);
+  @include ellipsis(1);
+  max-width: 100%;
+}
+
+.mono {
+  font-family: "Courier New", ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.08em;
+}
+
+.limitTrack {
+  @include flex(column, flex-start, stretch, 10px);
+  padding-top: 18px;
+  border-top: 1px solid var(--color-border);
+}
+
+.limitHeader {
+  @include flex(row, space-between, baseline, 12px);
+}
+
+.limitFigures {
+  font-size: 13px;
+  color: var(--color-text-muted);
+
+  strong {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+}
+
+.limitBar {
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: #eef1f7;
+  overflow: hidden;
+}
+
+.limitFill {
+  display: block;
+  height: 100%;
+  min-width: 6px;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    var(--color-primary) 0%,
+    var(--color-primary-dark) 100%
+  );
+  box-shadow: 0 1px 4px rgba(13, 148, 136, 0.4);
+  transition: width 600ms var(--ease-apple);
+}
+
+// --------------------------------------------------------------- stats ----
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+
+  @include xs {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.statTile {
+  @include card(20px);
+  @include flex(column, flex-start, flex-start, 7px);
+  min-width: 0;
+}
+
+.statLabel {
+  @include mutedLabel;
+}
+
+.statValue {
+  font-size: 22px;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
+  @include ellipsis(1);
+  max-width: 100%;
+}
+
+.statHint {
+  font-size: 12.5px;
+  color: var(--color-text-muted);
+}
+
+// ------------------------------------------------------------ timeline ----
+
+.timelinePanel {
+  @include card(24px);
+  min-width: 0;
+}
+
+.timelineHead {
+  @include flex(row, space-between, flex-start, 12px);
+  margin-bottom: 14px;
+}
+
+// ------------------------------------------------------------ activity ----
+
+.activity {
+  @include card(0px);
+  overflow: hidden;
+}
+
+.activityHeader {
+  @include flex(row, space-between, center, 16px);
+  padding: 22px 24px;
+  border-bottom: 1px solid var(--color-border);
+
+  @include sm {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.activitySub {
+  margin: 4px 0 0;
+  font-size: 13.5px;
+  color: var(--color-text-muted);
+}
+
+.totalChip {
+  @include pill(var(--color-primary-soft), var(--color-primary-dark));
+  flex-shrink: 0;
+  font-size: 12.5px;
+}
+
+// ------------------------------------------------------------ not found ----
+
+.notFound {
+  @include card(48px);
+  @include flex(column, center, center, 10px);
+  text-align: center;
+  margin: 48px auto 0;
+  max-width: 480px;
+}
+
+.notFoundBadge {
+  @include flex(row, center, center, 0);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--color-purple-soft);
+  color: var(--color-purple);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.notFoundTitle {
+  margin: 8px 0 0;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.notFoundHint {
+  margin: 0;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.notFoundLink {
+  @include pill(var(--color-primary), #ffffff);
+  margin-top: 14px;
+  font-size: 13.5px;
+  transition: transform var(--motion-fast) var(--ease-apple),
+    box-shadow var(--motion-fast) var(--ease-apple);
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
+  }
+}

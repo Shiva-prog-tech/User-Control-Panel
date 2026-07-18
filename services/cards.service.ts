@@ -52,6 +52,17 @@ export const getCards = async (): Promise<CardModel[]> => {
   }
 };
 
+export const getCardById = async (id: string): Promise<CardModel | null> => {
+  try {
+    const { data } = await http.get<ApiResponse<CardModel>>(
+      Config.ENDPOINTS.CARDS.DETAILS(id)
+    );
+    return data.data;
+  } catch {
+    return MOCK_CARDS.find((item) => item.id === id) ?? null;
+  }
+};
+
 export const updateCardStatus = async (
   id: string,
   payload: UpdateCardStatusPayload

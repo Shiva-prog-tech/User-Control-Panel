@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import Button from "@/Components/Button";
 import styles from "./ContactSupport.module.scss";
 
@@ -12,7 +12,7 @@ const ContactSupport = () => {
 
   const canSend = subject.trim() !== "" && message.trim() !== "";
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!canSend || sending) return;
     setSending(true);

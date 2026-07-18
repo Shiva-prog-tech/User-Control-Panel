@@ -10,24 +10,41 @@
   }
 }
 
+// Floating card: VisionOS-style glass, generous radius, layered soft shadow.
+// Raises 2px with a deeper shadow on hover — the "floating" micro-animation.
 @mixin card($padding: 24px) {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  @include glass(0.72, 20px);
   border-radius: var(--radius-card);
-  box-shadow: var(--shadow-card);
   padding: $padding;
+  transition: box-shadow var(--motion-base) var(--ease-apple),
+    transform var(--motion-base) var(--ease-apple);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card-hover),
+      inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+
+    &:hover {
+      transform: none;
+    }
+  }
 }
 
 @mixin sectionTitle {
-  font-size: 17px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 650;
+  letter-spacing: -0.015em;
   color: var(--color-text);
 }
 
 @mixin mutedLabel {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   color: var(--color-text-muted);
 }
@@ -60,22 +77,32 @@
 @mixin inputField {
   width: 100%;
   padding: 13px 16px;
-  border: 1px solid var(--color-border);
-  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
   background: var(--color-surface);
   font-size: 14px;
   color: var(--color-text);
   outline: none;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: border-color var(--motion-fast) var(--ease-apple),
+    box-shadow var(--motion-fast) var(--ease-apple);
 
   &::placeholder {
-    color: #a5aebf;
+    color: #a1a1a6;
   }
 
   &:focus {
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
+    box-shadow: 0 0 0 3.5px rgba(16, 185, 129, 0.14);
   }
+}
+
+// VisionOS-style glass: luminous top edge, hairline definition, soft float.
+@mixin glass($bg-alpha: 0.6, $blur: 20px) {
+  background: rgba(255, 255, 255, $bg-alpha);
+  -webkit-backdrop-filter: blur($blur) saturate(1.8);
+  backdrop-filter: blur($blur) saturate(1.8);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: var(--shadow-card), inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 @mixin hideScrollbar {

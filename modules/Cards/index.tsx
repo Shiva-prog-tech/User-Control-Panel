@@ -1,9 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import Link from "next/link";
 import Loader from "@/Components/Loader";
 import { getCards } from "@/services/cards.service";
-import { CardStatus } from "@/types/constants";
+import { CardStatus, ROUTES } from "@/types/constants";
 import { CardModel } from "@/types/global";
 import CardVisual from "./components/CardVisual";
 import CardControls from "./components/CardControls";
@@ -63,7 +64,31 @@ const Cards = () => {
       <div className={styles.grid}>
         {cards.map((card) => (
           <section key={card.id} className={styles.cardRow}>
-            <CardVisual card={card} />
+            <Link
+              href={ROUTES.CARD_DETAILS(card.id)}
+              className={styles.cardLink}
+              aria-label={`View details for ${card.brand} card ending in ${card.last4}`}
+            >
+              <CardVisual card={card} />
+              <span className={styles.viewHint}>
+                View details
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="m7.5 4.5 5.5 5.5-5.5 5.5"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+            </Link>
             <CardControls card={card} onCardUpdate={handleCardUpdate} />
           </section>
         ))}

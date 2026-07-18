@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, FormEvent, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Button from "@/Components/Button";
 import { submitDocument } from "@/services/verification.service";
 import { VerificationStepStatus } from "@/types/constants";
@@ -38,13 +38,13 @@ const DocumentUpload = ({ steps }: DocumentUploadProps) => {
 
   const canSubmit = stepId !== "" && documentType !== "" && fileName !== "";
 
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     setFileName(file ? file.name : "");
     setMessage("");
   };
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!canSubmit || submitting) return;
 

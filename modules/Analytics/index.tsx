@@ -7,6 +7,7 @@ import { AnalyticsSummary } from "@/types/global";
 import SummaryTiles from "./components/SummaryTiles";
 import CategoryBreakdown from "./components/CategoryBreakdown";
 import MonthlyComparison from "./components/MonthlyComparison";
+import TrendLine from "./components/TrendLine";
 import styles from "./Analytics.module.scss";
 
 const Analytics = () => {
@@ -45,6 +46,7 @@ const Analytics = () => {
         totalSpent={summary.totalSpentThisMonth}
         totalIncome={summary.totalIncomeThisMonth}
       />
+      <TrendLine trend={summary.trend} />
       <div className={styles.grid}>
         <CategoryBreakdown categories={summary.categories} />
         <MonthlyComparison data={summary.monthlyComparison} />

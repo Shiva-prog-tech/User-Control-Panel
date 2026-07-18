@@ -1,14 +1,20 @@
 @use "mixins" as *;
 @use "media" as *;
 
+// Graphite ink hero — the one dark, expensive object on the soft canvas.
 .card {
   @include flex(column, flex-start, flex-start, 18px);
   padding: 30px 32px;
-  border-radius: 18px;
+  border-radius: 20px;
   min-height: 240px;
-  background:
-    radial-gradient(1200px 300px at 90% -40%, rgba(16, 185, 129, 0.18), transparent),
-    linear-gradient(115deg, #0c1834 0%, var(--color-navy) 45%, #0d2b47 100%);
+  background: radial-gradient(
+      900px 320px at 88% -30%,
+      rgba(16, 185, 129, 0.22),
+      transparent 70%
+    ),
+    linear-gradient(150deg, #202024 0%, #1a1a1e 55%, #232329 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 20px 48px rgba(0, 0, 0, 0.18);
   color: #ffffff;
 
   @include sm {
@@ -20,7 +26,7 @@
   @include flex(row, flex-start, center, 10px);
   font-size: 15px;
   font-weight: 600;
-  color: #c7d2ea;
+  color: #d1d1d6;
 }
 
 .iconChip {
@@ -32,10 +38,11 @@
 }
 
 .amount {
-  font-size: 46px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
   color: #ffffff;
+  font-variant-numeric: tabular-nums;
 
   @include sm {
     font-size: 36px;
@@ -50,11 +57,12 @@
 .description {
   margin: 0;
   font-size: 14.5px;
-  color: #c7d2ea;
+  color: #d1d1d6;
 }
 
 .breakdown {
   margin: 0;
   font-size: 13px;
-  color: #8fa1c7;
+  color: #98989d;
+  font-variant-numeric: tabular-nums;
 }
