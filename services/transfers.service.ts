@@ -1,7 +1,11 @@
+import {
+  Beneficiary,
+  Transfer,
+  TransferStatus,
+} from "@/modules/Transfers/types";
+import { ApiResponse } from "@/types/global";
 import http from "@/utils/axios";
 import Config from "@/utils/Config";
-import { ApiResponse, Beneficiary, Transfer } from "@/types/global";
-import { TransferStatus } from "@/types/constants";
 
 export interface SendMoneyPayload {
   fromAccountId: string;

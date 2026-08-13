@@ -1,9 +1,8 @@
 "use client";
 
 import { useCallback, useRef, useState } from "react";
+import { CardModel, CardStatus } from "@/modules/Cards/types";
 import { classNames, maskCardNumber } from "@/utils/helper";
-import { CardStatus } from "@/types/constants";
-import { CardModel } from "@/types/global";
 import styles from "./FlipCard.module.scss";
 
 interface FlipCardProps {

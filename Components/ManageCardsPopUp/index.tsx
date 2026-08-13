@@ -5,11 +5,11 @@ import Link from "next/link";
 import Button from "@/Components/Button";
 import Loader from "@/Components/Loader";
 import PopUpWrapper from "@/Components/PopUpWrapper";
+import { CardModel, CardStatus } from "@/modules/Cards/types";
 import { useAppDispatch } from "@/redux/hooks";
 import { hidePopUp } from "@/redux/reducers/PopUpsReducer";
 import { getCards, updateCardStatus } from "@/services/cards.service";
-import { CardStatus, POPUPS, ROUTES } from "@/types/constants";
-import { CardModel } from "@/types/global";
+import { POPUPS, ROUTES } from "@/types/constants";
 import { classNames, maskCardNumber } from "@/utils/helper";
 import styles from "./ManageCardsPopUp.module.scss";
 

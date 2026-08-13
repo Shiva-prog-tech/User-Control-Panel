@@ -1,46 +1,68 @@
 // Every static asset path lives here as a named const.
 // Components must import these names — never hardcode "/assets/..." strings.
+//
+// Assets are filed by owning module: public/assets/<module>/ holds the icons
+// that module's domain owns, and public/assets/common/ holds the app-shell
+// chrome (Sidebar, Header, popups, auth screens) plus glyphs shared by more
+// than one module.
 
-export const AppLogoIcon = "/assets/icons/logo.svg";
+// ---------------------------------------------------------------- common ----
+export const AppLogoIcon = "/assets/common/logo.svg";
 
-// Sidebar navigation
-export const DashboardIcon = "/assets/icons/dashboard.svg";
-export const AccountsIcon = "/assets/icons/accounts.svg";
-export const CardsIcon = "/assets/icons/cards.svg";
-export const TransfersIcon = "/assets/icons/transfers.svg";
-export const TransactionsIcon = "/assets/icons/transactions.svg";
-export const AnalyticsIcon = "/assets/icons/analytics.svg";
-export const VerificationIcon = "/assets/icons/verification.svg";
-export const NotificationsIcon = "/assets/icons/notifications.svg";
-export const SettingsIcon = "/assets/icons/settings.svg";
-export const HelpIcon = "/assets/icons/help.svg";
-export const SignOutIcon = "/assets/icons/signout.svg";
-
-// Header / common chrome
-export const SearchIcon = "/assets/icons/search.svg";
-export const BellIcon = "/assets/icons/bell.svg";
-export const ShieldIcon = "/assets/icons/shield.svg";
-export const ClockIcon = "/assets/icons/clock.svg";
-export const ChevronRightIcon = "/assets/icons/chevron-right.svg";
-export const ChevronDownIcon = "/assets/icons/chevron-down.svg";
-export const CloseIcon = "/assets/icons/close.svg";
-export const CheckIcon = "/assets/icons/check.svg";
-export const AlertIcon = "/assets/icons/alert.svg";
-export const PlusIcon = "/assets/icons/plus.svg";
-export const FilterIcon = "/assets/icons/filter.svg";
-export const DownloadIcon = "/assets/icons/download.svg";
-export const UserIcon = "/assets/icons/user.svg";
-
-// Feature icons
-export const WalletIcon = "/assets/icons/wallet.svg";
-export const SendIcon = "/assets/icons/send.svg";
-export const AddFundsIcon = "/assets/icons/add-funds.svg";
-export const TrendUpIcon = "/assets/icons/trend-up.svg";
-export const CryptoIcon = "/assets/icons/crypto.svg";
-export const RewardIcon = "/assets/icons/reward.svg";
+// Header / shell chrome
+export const SearchIcon = "/assets/common/search.svg";
+export const BellIcon = "/assets/common/bell.svg";
+export const ShieldIcon = "/assets/common/shield.svg";
+export const ClockIcon = "/assets/common/clock.svg";
+export const ChevronRightIcon = "/assets/common/chevron-right.svg";
+export const ChevronDownIcon = "/assets/common/chevron-down.svg";
+export const CloseIcon = "/assets/common/close.svg";
+export const SignOutIcon = "/assets/common/signout.svg";
+export const PlusIcon = "/assets/common/plus.svg";
+export const FilterIcon = "/assets/common/filter.svg";
+export const DownloadIcon = "/assets/common/download.svg";
 
 // Auth screens
-export const MailIcon = "/assets/icons/mail.svg";
-export const LockIcon = "/assets/icons/lock.svg";
-export const EyeIcon = "/assets/icons/eye.svg";
-export const EyeOffIcon = "/assets/icons/eye-off.svg";
+export const MailIcon = "/assets/common/mail.svg";
+export const LockIcon = "/assets/common/lock.svg";
+export const UserIcon = "/assets/common/user.svg";
+export const EyeIcon = "/assets/common/eye.svg";
+export const EyeOffIcon = "/assets/common/eye-off.svg";
+
+// -------------------------------------------------------------- Accounts ----
+export const AccountsIcon = "/assets/accounts/accounts.svg";
+export const WalletIcon = "/assets/accounts/wallet.svg";
+export const RewardIcon = "/assets/accounts/reward.svg";
+export const CryptoIcon = "/assets/accounts/crypto.svg";
+
+// ------------------------------------------------------------- Dashboard ----
+export const DashboardIcon = "/assets/dashboard/dashboard.svg";
+
+// ----------------------------------------------------------------- Cards ----
+export const CardsIcon = "/assets/cards/cards.svg";
+
+// ------------------------------------------------------------- Transfers ----
+export const TransfersIcon = "/assets/transfers/transfers.svg";
+export const SendIcon = "/assets/transfers/send.svg";
+export const AddFundsIcon = "/assets/transfers/add-funds.svg";
+
+// ---------------------------------------------------------- Transactions ----
+export const TransactionsIcon = "/assets/transactions/transactions.svg";
+
+// ------------------------------------------------------------- Analytics ----
+export const AnalyticsIcon = "/assets/analytics/analytics.svg";
+export const TrendUpIcon = "/assets/analytics/trend-up.svg";
+
+// ---------------------------------------------------------- Verification ----
+export const VerificationIcon = "/assets/verification/verification.svg";
+export const CheckIcon = "/assets/verification/check.svg";
+export const AlertIcon = "/assets/verification/alert.svg";
+
+// --------------------------------------------------------- Notifications ----
+export const NotificationsIcon = "/assets/notifications/notifications.svg";
+
+// -------------------------------------------------------------- Settings ----
+export const SettingsIcon = "/assets/settings/settings.svg";
+
+// ------------------------------------------------------------------ Help ----
+export const HelpIcon = "/assets/help/help.svg";

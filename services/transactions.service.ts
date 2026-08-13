@@ -1,7 +1,11 @@
+import {
+  Transaction,
+  TransactionStatus,
+  TransactionType,
+} from "@/modules/Transactions/types";
+import { ApiResponse } from "@/types/global";
 import http from "@/utils/axios";
 import Config from "@/utils/Config";
-import { ApiResponse, Transaction } from "@/types/global";
-import { TransactionStatus, TransactionType } from "@/types/constants";
 
 export interface TransactionFilters {
   search?: string;

@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 import Button from "@/Components/Button";
 import Loader from "@/Components/Loader";
+import { NotificationItem } from "@/modules/Notifications/types";
 import {
   getNotifications,
   markAllNotificationsRead,
   markNotificationRead,
 } from "@/services/notifications.service";
-import { NotificationItem } from "@/types/global";
 import NotificationRow from "./components/NotificationRow";
 import styles from "./Notifications.module.scss";
 

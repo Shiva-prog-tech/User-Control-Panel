@@ -28,16 +28,19 @@ non-existent API, so the whole UI renders out of the box.
 ```
 app/            Thin route wrappers only — each page.tsx renders one module
 modules/        Feature modules: index.tsx ("use client") + <Feature>.module.scss
-                └── components/  Feature-private sub-components (folder each)
+                ├── components/  Feature-private sub-components (folder each)
+                └── types.ts     The module's own models and enums
 Components/     Cross-feature reusable UI (shell, popups, buttons, tables…)
 redux/          store.ts, provider.tsx, hooks/, reducers/ (auth persisted)
 services/       All HTTP calls — typed request/response, axios instance
 customHooks/    useSessionTimer, useOutsideClick, useDebounce
 utils/          Config.ts (env-driven), axios.ts, ImageRelativePaths.ts, helper.ts
-types/          global.ts (domain models), constants.ts (enums, routes, popups)
+types/          global.ts (ApiResponse, User, SpendingTrendPoint),
+                constants.ts (ROUTES, POPUPS) — only what no module owns
 libs/           navigation.ts (sidebar registry)
 styles/         globals.css, mixins.scss, media.scss
-public/assets/  Static assets — referenced ONLY via utils/ImageRelativePaths.ts
+public/assets/  <module>/ per owning module + common/ for shell and shared
+                glyphs — referenced ONLY via utils/ImageRelativePaths.ts
 ```
 
 ### Layering rules
@@ -50,7 +53,13 @@ public/assets/  Static assets — referenced ONLY via utils/ImageRelativePaths.t
 4. Modals are driven by the `PopUps` slice: `showPopUp(name)` / `hidePopUp(name)`
    with names from `types/constants.ts` → rendered by `Components/PopUpHandler`.
 5. Image paths are named consts in `utils/ImageRelativePaths.ts` — never
-   hardcoded strings in components.
+   hardcoded strings in components. Each icon is filed under the module that
+   owns it (`public/assets/accounts/wallet.svg`); shell chrome and glyphs used
+   by several modules live in `public/assets/common/`.
+6. A domain model belongs to the module named for it —
+   `modules/Accounts/types.ts` owns `Account` and `AccountType`. Other modules
+   and `services/` import from there. `types/` keeps only what no single module
+   owns: the API envelope, `User`, routes and popup names.
 
 ### Provider nesting (app/layout.tsx)
 

@@ -1,8 +1,11 @@
 "use client";
 
 import DataTable, { DataTableColumn } from "@/Components/DataTable";
-import { TransactionStatus, TransactionType } from "@/types/constants";
-import { Transaction } from "@/types/global";
+import {
+  Transaction,
+  TransactionStatus,
+  TransactionType,
+} from "@/modules/Transactions/types";
 import { classNames, formatCurrency, formatDate } from "@/utils/helper";
 import styles from "./TransactionsTable.module.scss";
 

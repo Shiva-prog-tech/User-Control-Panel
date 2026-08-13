@@ -1,8 +1,7 @@
 "use client";
 
+import { CardModel, CardStatus } from "@/modules/Cards/types";
 import { classNames, maskCardNumber } from "@/utils/helper";
-import { CardStatus } from "@/types/constants";
-import { CardModel } from "@/types/global";
 import styles from "./CardVisual.module.scss";
 
 interface CardVisualProps {

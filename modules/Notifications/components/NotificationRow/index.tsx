@@ -1,7 +1,9 @@
 "use client";
 
-import { NotificationType } from "@/types/constants";
-import { NotificationItem } from "@/types/global";
+import {
+  NotificationItem,
+  NotificationType,
+} from "@/modules/Notifications/types";
 import { classNames, formatDate } from "@/utils/helper";
 import styles from "./NotificationRow.module.scss";
 

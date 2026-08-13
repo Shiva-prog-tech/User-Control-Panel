@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { AccountType, ROUTES } from "@/types/constants";
-import { Account } from "@/types/global";
+import { Account, AccountType } from "@/modules/Accounts/types";
+import { ROUTES } from "@/types/constants";
 import { formatCurrency } from "@/utils/helper";
 import {
   ChevronRightIcon,

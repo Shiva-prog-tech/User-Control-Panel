@@ -1,7 +1,10 @@
 "use client";
 
-import { TransactionStatus, TransactionType } from "@/types/constants";
-import { Transaction } from "@/types/global";
+import {
+  Transaction,
+  TransactionStatus,
+  TransactionType,
+} from "@/modules/Transactions/types";
 import {
   classNames,
   formatCurrency,

@@ -1,6 +1,7 @@
+import { AnalyticsSummary } from "@/modules/Analytics/types";
+import { ApiResponse } from "@/types/global";
 import http from "@/utils/axios";
 import Config from "@/utils/Config";
-import { AnalyticsSummary, ApiResponse } from "@/types/global";
 
 // Mock fallback until the API is live.
 const MOCK_SUMMARY: AnalyticsSummary = {

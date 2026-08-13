@@ -1,7 +1,10 @@
+import {
+  VerificationStatus,
+  VerificationStepStatus,
+} from "@/modules/Verification/types";
+import { ApiResponse } from "@/types/global";
 import http from "@/utils/axios";
 import Config from "@/utils/Config";
-import { ApiResponse, VerificationStatus } from "@/types/global";
-import { VerificationStepStatus } from "@/types/constants";
 
 export interface SubmitDocumentPayload {
   stepId: string;

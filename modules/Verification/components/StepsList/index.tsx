@@ -1,8 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { VerificationStepStatus } from "@/types/constants";
-import { VerificationStep } from "@/types/global";
+import {
+  VerificationStep,
+  VerificationStepStatus,
+} from "@/modules/Verification/types";
 import { classNames } from "@/utils/helper";
 import { AlertIcon, CheckIcon, ClockIcon } from "@/utils/ImageRelativePaths";
 import styles from "./StepsList.module.scss";

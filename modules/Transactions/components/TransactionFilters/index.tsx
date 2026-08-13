@@ -3,7 +3,10 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import useDebounce from "@/customHooks/useDebounce";
-import { TransactionStatus, TransactionType } from "@/types/constants";
+import {
+  TransactionStatus,
+  TransactionType,
+} from "@/modules/Transactions/types";
 import { ChevronDownIcon, SearchIcon } from "@/utils/ImageRelativePaths";
 import styles from "./TransactionFilters.module.scss";
 

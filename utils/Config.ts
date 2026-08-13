@@ -10,6 +10,16 @@ const Config = {
   ),
   AMCHARTS_LICENSE: process.env.NEXT_PUBLIC_AMCHARTS_LICENSE ?? "",
 
+  // QR sign-in: how long a scanned code stays valid before the web page
+  // rotates to a fresh one, and how often it polls the backend for approval.
+  QR_SESSION_TTL_MS: Number(process.env.NEXT_PUBLIC_QR_SESSION_TTL_MS ?? 12_000),
+  QR_POLL_INTERVAL_MS: Number(
+    process.env.NEXT_PUBLIC_QR_POLL_INTERVAL_MS ?? 2_500
+  ),
+  // Dev-only: with no backend, auto-approve the mock session after this many
+  // ms so the scan→login→redirect path is demonstrable. 0 keeps it pending.
+  QR_MOCK_APPROVE_MS: Number(process.env.NEXT_PUBLIC_QR_MOCK_APPROVE_MS ?? 0),
+
   STORAGE_KEYS: {
     AUTH_TOKEN: "swipeo_auth_token",
     PERSIST_ROOT: "swipeo-root",
@@ -21,6 +31,8 @@ const Config = {
       SIGNUP: "/auth/signup",
       FORGOT_PASSWORD: "/auth/forgot-password",
       LOGOUT: "/auth/logout",
+      QR_CREATE: "/auth/qr-session",
+      QR_STATUS: (token: string) => `/auth/qr-session/${token}`,
     },
     DASHBOARD: {
       OVERVIEW: "/dashboard/overview",

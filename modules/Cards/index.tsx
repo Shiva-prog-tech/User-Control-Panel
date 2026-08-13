@@ -3,9 +3,9 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import Loader from "@/Components/Loader";
+import { CardModel, CardStatus } from "@/modules/Cards/types";
 import { getCards } from "@/services/cards.service";
-import { CardStatus, ROUTES } from "@/types/constants";
-import { CardModel } from "@/types/global";
+import { ROUTES } from "@/types/constants";
 import CardVisual from "./components/CardVisual";
 import CardControls from "./components/CardControls";
 import styles from "./Cards.module.scss";

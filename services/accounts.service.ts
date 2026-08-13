@@ -1,7 +1,7 @@
+import { Account, AccountType } from "@/modules/Accounts/types";
+import { ApiResponse } from "@/types/global";
 import http from "@/utils/axios";
 import Config from "@/utils/Config";
-import { Account, ApiResponse } from "@/types/global";
-import { AccountType } from "@/types/constants";
 
 // Mock fallback until the API is live.
 const MOCK_ACCOUNTS: Account[] = [

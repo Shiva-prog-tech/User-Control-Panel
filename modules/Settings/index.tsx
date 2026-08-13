@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Loader from "@/Components/Loader";
+import { UserSettings } from "@/modules/Settings/types";
 import { getSettings } from "@/services/user.service";
-import { UserSettings } from "@/types/global";
 import ProfileSection from "./components/ProfileSection";
 import SecuritySection from "./components/SecuritySection";
 import PreferencesSection from "./components/PreferencesSection";

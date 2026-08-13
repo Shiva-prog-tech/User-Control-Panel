@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Loader from "@/Components/Loader";
+import { DashboardOverview } from "@/modules/Dashboard/types";
 import { getDashboardOverview } from "@/services/dashboard.service";
-import { DashboardOverview } from "@/types/global";
 import { formatCurrency } from "@/utils/helper";
 import { CardsIcon, ClockIcon, TrendUpIcon } from "@/utils/ImageRelativePaths";
 import AccountsPanel from "./components/AccountsPanel";

@@ -5,7 +5,7 @@ import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 import LivePill from "@/Components/LivePill";
 import { createSwipeoRoot } from "@/libs/amchartsTheme";
-import { MonthlyComparisonPoint } from "@/types/global";
+import { MonthlyComparisonPoint } from "@/modules/Analytics/types";
 import styles from "./MonthlyComparison.module.scss";
 
 interface MonthlyComparisonProps {

@@ -1,7 +1,8 @@
+import { AccountType } from "@/modules/Accounts/types";
+import { DashboardOverview } from "@/modules/Dashboard/types";
+import { ApiResponse } from "@/types/global";
 import http from "@/utils/axios";
 import Config from "@/utils/Config";
-import { ApiResponse, DashboardOverview } from "@/types/global";
-import { AccountType } from "@/types/constants";
 
 // Mock fallback until the API is live — mirrors the dashboard designs.
 const MOCK_OVERVIEW: DashboardOverview = {

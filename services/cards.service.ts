@@ -1,7 +1,7 @@
+import { CardKind, CardModel, CardStatus } from "@/modules/Cards/types";
+import { ApiResponse } from "@/types/global";
 import http from "@/utils/axios";
 import Config from "@/utils/Config";
-import { ApiResponse, CardModel } from "@/types/global";
-import { CardKind, CardStatus } from "@/types/constants";
 
 export interface UpdateCardStatusPayload {
   status: CardStatus;

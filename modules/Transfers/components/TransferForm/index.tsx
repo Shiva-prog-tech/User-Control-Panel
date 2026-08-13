@@ -3,8 +3,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import Button from "@/Components/Button";
+import { Account } from "@/modules/Accounts/types";
+import { Beneficiary, Transfer } from "@/modules/Transfers/types";
 import { sendMoney } from "@/services/transfers.service";
-import { Account, Beneficiary, Transfer } from "@/types/global";
 import { formatCurrency } from "@/utils/helper";
 import { SendIcon } from "@/utils/ImageRelativePaths";
 import styles from "./TransferForm.module.scss";

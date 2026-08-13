@@ -4,16 +4,17 @@ import { useEffect, useState } from "react";
 import Button from "@/Components/Button";
 import Loader from "@/Components/Loader";
 import PopUpWrapper from "@/Components/PopUpWrapper";
+import { Account } from "@/modules/Accounts/types";
+import { Beneficiary, Transfer } from "@/modules/Transfers/types";
 import { useAppDispatch } from "@/redux/hooks";
 import { hidePopUp } from "@/redux/reducers/PopUpsReducer";
 import { getAccounts } from "@/services/accounts.service";
 import {
+  SendMoneyPayload,
   getBeneficiaries,
   sendMoney,
-  SendMoneyPayload,
 } from "@/services/transfers.service";
 import { POPUPS } from "@/types/constants";
-import { Account, Beneficiary, Transfer } from "@/types/global";
 import { formatCurrency } from "@/utils/helper";
 import styles from "./SendMoneyPopUp.module.scss";
 

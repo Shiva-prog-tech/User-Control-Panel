@@ -1,6 +1,7 @@
+import { UserSettings } from "@/modules/Settings/types";
+import { ApiResponse, User } from "@/types/global";
 import http from "@/utils/axios";
 import Config from "@/utils/Config";
-import { ApiResponse, User, UserSettings } from "@/types/global";
 
 export interface UpdateProfilePayload {
   firstName?: string;

@@ -1,6 +1,6 @@
 "use client";
 
-import { Beneficiary } from "@/types/global";
+import { Beneficiary } from "@/modules/Transfers/types";
 import { getInitials } from "@/utils/helper";
 import styles from "./BeneficiariesList.module.scss";
 

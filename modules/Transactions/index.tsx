@@ -2,9 +2,12 @@
 
 import { useEffect, useState } from "react";
 import Loader from "@/Components/Loader";
+import {
+  Transaction,
+  TransactionStatus,
+  TransactionType,
+} from "@/modules/Transactions/types";
 import { getTransactions } from "@/services/transactions.service";
-import { TransactionStatus, TransactionType } from "@/types/constants";
-import { Transaction } from "@/types/global";
 import TransactionFilters from "./components/TransactionFilters";
 import TransactionsTable from "./components/TransactionsTable";
 import styles from "./Transactions.module.scss";

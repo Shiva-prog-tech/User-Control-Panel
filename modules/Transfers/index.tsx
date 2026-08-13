@@ -2,12 +2,13 @@
 
 import { useEffect, useState } from "react";
 import Loader from "@/Components/Loader";
+import { Account } from "@/modules/Accounts/types";
+import { Beneficiary, Transfer } from "@/modules/Transfers/types";
 import { getAccounts } from "@/services/accounts.service";
 import {
   getBeneficiaries,
   getRecentTransfers,
 } from "@/services/transfers.service";
-import { Account, Beneficiary, Transfer } from "@/types/global";
 import TransferForm from "./components/TransferForm";
 import BeneficiariesList from "./components/BeneficiariesList";
 import RecentTransfers from "./components/RecentTransfers";

@@ -2,9 +2,11 @@
 
 import { useMemo, useState } from "react";
 import Button from "@/Components/Button";
+import {
+  VerificationStep,
+  VerificationStepStatus,
+} from "@/modules/Verification/types";
 import { submitDocument } from "@/services/verification.service";
-import { VerificationStepStatus } from "@/types/constants";
-import { VerificationStep } from "@/types/global";
 import styles from "./DocumentUpload.module.scss";
 
 interface DocumentUploadProps {

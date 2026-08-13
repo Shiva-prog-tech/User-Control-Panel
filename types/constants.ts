@@ -1,4 +1,5 @@
-// App-wide constant values and enums.
+// App-wide constant values. Module-specific enums live alongside their
+// module's models in modules/<Module>/types.ts.
 
 export const POPUPS = {
   SEND_MONEY: "sendMoneyPopUp",
@@ -33,52 +34,3 @@ export const AUTH_ROUTES: string[] = [
   ROUTES.SIGNUP,
   ROUTES.FORGOT_PASSWORD,
 ];
-
-export enum AccountType {
-  REWARD = "REWARD",
-  PLATFORM = "PLATFORM",
-  CHECKING = "CHECKING",
-  SAVINGS = "SAVINGS",
-}
-
-export enum CardStatus {
-  ACTIVE = "ACTIVE",
-  FROZEN = "FROZEN",
-  BLOCKED = "BLOCKED",
-}
-
-export enum CardKind {
-  VIRTUAL = "VIRTUAL",
-  PHYSICAL = "PHYSICAL",
-}
-
-export enum TransactionStatus {
-  COMPLETED = "COMPLETED",
-  PENDING = "PENDING",
-  FAILED = "FAILED",
-}
-
-export enum TransactionType {
-  DEBIT = "DEBIT",
-  CREDIT = "CREDIT",
-}
-
-export enum TransferStatus {
-  COMPLETED = "COMPLETED",
-  PENDING = "PENDING",
-  FAILED = "FAILED",
-}
-
-export enum VerificationStepStatus {
-  COMPLETED = "COMPLETED",
-  IN_REVIEW = "IN_REVIEW",
-  ACTION_REQUIRED = "ACTION_REQUIRED",
-  NOT_STARTED = "NOT_STARTED",
-}
-
-export enum NotificationType {
-  TRANSACTION = "TRANSACTION",
-  SECURITY = "SECURITY",
-  SYSTEM = "SYSTEM",
-  PROMOTION = "PROMOTION",
-}

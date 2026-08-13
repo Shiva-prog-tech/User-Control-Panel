@@ -1,7 +1,10 @@
+import {
+  NotificationItem,
+  NotificationType,
+} from "@/modules/Notifications/types";
+import { ApiResponse } from "@/types/global";
 import http from "@/utils/axios";
 import Config from "@/utils/Config";
-import { ApiResponse, NotificationItem } from "@/types/global";
-import { NotificationType } from "@/types/constants";
 
 // Mock fallback until the API is live.
 const MOCK_NOTIFICATIONS: NotificationItem[] = [

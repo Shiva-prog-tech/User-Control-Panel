@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Loader from "@/Components/Loader";
+import { VerificationStatus } from "@/modules/Verification/types";
 import { getVerificationStatus } from "@/services/verification.service";
-import { VerificationStatus } from "@/types/global";
 import StatusOverview from "./components/StatusOverview";
 import StepsList from "./components/StepsList";
 import DocumentUpload from "./components/DocumentUpload";

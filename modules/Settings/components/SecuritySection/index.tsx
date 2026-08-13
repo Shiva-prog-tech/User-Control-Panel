@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import Button from "@/Components/Button";
+import { UserSettings } from "@/modules/Settings/types";
 import { updateSettings } from "@/services/user.service";
-import { UserSettings } from "@/types/global";
 import styles from "./SecuritySection.module.scss";
 
 interface SecuritySectionProps {

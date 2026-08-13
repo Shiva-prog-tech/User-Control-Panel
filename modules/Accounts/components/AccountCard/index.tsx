@@ -3,10 +3,10 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Button from "@/Components/Button";
+import { Account, AccountType } from "@/modules/Accounts/types";
 import { useAppDispatch } from "@/redux/hooks";
 import { showPopUp } from "@/redux/reducers/PopUpsReducer";
-import { AccountType, POPUPS, ROUTES } from "@/types/constants";
-import { Account } from "@/types/global";
+import { POPUPS, ROUTES } from "@/types/constants";
 import { formatCurrency } from "@/utils/helper";
 import {
   AddFundsIcon,

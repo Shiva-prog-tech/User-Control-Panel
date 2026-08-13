@@ -1,7 +1,6 @@
 "use client";
 
-import { TransferStatus } from "@/types/constants";
-import { Transfer } from "@/types/global";
+import { Transfer, TransferStatus } from "@/modules/Transfers/types";
 import { classNames, formatCurrency, formatDate } from "@/utils/helper";
 import styles from "./RecentTransfers.module.scss";
 

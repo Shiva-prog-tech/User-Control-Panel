@@ -1,8 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { VerificationStatus } from "@/types/global";
-import { VerificationStepStatus } from "@/types/constants";
+import {
+  VerificationStatus,
+  VerificationStepStatus,
+} from "@/modules/Verification/types";
 import { ShieldIcon } from "@/utils/ImageRelativePaths";
 import styles from "./StatusOverview.module.scss";
 

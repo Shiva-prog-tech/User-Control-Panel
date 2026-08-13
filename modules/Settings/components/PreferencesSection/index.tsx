@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { UserSettings } from "@/modules/Settings/types";
 import { updateSettings } from "@/services/user.service";
-import { UserSettings } from "@/types/global";
 import styles from "./PreferencesSection.module.scss";
 
 interface PreferencesSectionProps {

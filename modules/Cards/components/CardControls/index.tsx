@@ -2,9 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import Button from "@/Components/Button";
+import { CardModel, CardStatus } from "@/modules/Cards/types";
 import { updateCardLimit, updateCardStatus } from "@/services/cards.service";
-import { CardStatus } from "@/types/constants";
-import { CardModel } from "@/types/global";
 import { classNames, formatCurrency } from "@/utils/helper";
 import styles from "./CardControls.module.scss";
 

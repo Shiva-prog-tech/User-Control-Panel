@@ -5,7 +5,7 @@ import * as am5 from "@amcharts/amcharts5";
 import * as am5percent from "@amcharts/amcharts5/percent";
 import LivePill from "@/Components/LivePill";
 import { CHART_PALETTE, createSwipeoRoot } from "@/libs/amchartsTheme";
-import { CategorySpend } from "@/types/global";
+import { CategorySpend } from "@/modules/Analytics/types";
 import { formatCurrency } from "@/utils/helper";
 import styles from "./CategoryBreakdown.module.scss";
 

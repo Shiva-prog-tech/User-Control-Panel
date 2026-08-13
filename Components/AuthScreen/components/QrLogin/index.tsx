@@ -1,139 +1,71 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo } from "react";
+import { useRouter } from "next/navigation";
+import QRCode from "qrcode";
+import { useAppDispatch } from "@/redux/hooks";
+import { loginSuccess } from "@/redux/reducers/AuthReducer";
+import { ROUTES } from "@/types/constants";
+import Config from "@/utils/Config";
 import { classNames } from "@/utils/helper";
+import { useQrSession } from "./useQrSession";
 import styles from "./QrLogin.module.scss";
 
 interface QrLoginProps {
   onBack: () => void;
 }
 
-// QR geometry mirrors a version-3 code (29×29 modules): real finder, timing
-// and alignment patterns, with data modules derived from a session token.
-// The token rotates like WhatsApp Web's pairing code. Once the auth API can
-// mint real pairing payloads, swap `buildMatrix` for a true QR encoder fed
-// by the backend token — the presentation layer stays as is.
-const QR_SIZE = 29;
-const REFRESH_INTERVAL_MS = 12_000;
-const GENERATING_MS = 950;
+// Renders the live QR for the current sign-in session. The session token is
+// minted and rotated by `useQrSession`; here we encode it into a genuine,
+// scannable QR (via the `qrcode` encoder: bit encoding → Reed–Solomon error
+// correction → masked module placement) and, once the phone approves it, log
+// the user in and send them to the dashboard.
+//
+// Level "H" (~30% recoverable) keeps the code scannable even though the centre
+// logo overlay covers some modules.
+const EC_LEVEL = "H" as const;
 
-// mulberry32 — tiny seeded PRNG so a token always yields the same pattern.
-const mulberry32 = (seed: number) => {
-  let state = seed;
-  return () => {
-    state |= 0;
-    state = (state + 0x6d2b79f5) | 0;
-    let t = Math.imul(state ^ (state >>> 15), 1 | state);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-};
+// The QR carries a deep link, not a bare token, so the phone app knows where
+// to send its approval — e.g. https://app.swipeo.io/link?token=<token>.
+const linkFor = (token: string): string =>
+  `${Config.APP_URL}/link?token=${encodeURIComponent(token)}`;
 
-const hashToken = (token: string): number => {
-  let hash = 2166136261;
-  for (let i = 0; i < token.length; i += 1) {
-    hash ^= token.charCodeAt(i);
-    hash = Math.imul(hash, 16777619);
-  }
-  return hash >>> 0;
-};
+// Encode the payload into a genuine QR matrix and emit an SVG path plus the
+// module count (QR "version" dictates the grid size, so it varies).
+const buildQr = (payload: string): { path: string; size: number } => {
+  const qr = QRCode.create(payload, { errorCorrectionLevel: EC_LEVEL });
+  const size = qr.modules.size;
+  const data = qr.modules.data;
 
-const randomToken = (): string => {
-  const bytes = new Uint8Array(16);
-  crypto.getRandomValues(bytes);
-  return Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join(
-    ""
-  );
-};
-
-type Matrix = boolean[][];
-
-const buildMatrix = (token: string): Matrix => {
-  const cells: (boolean | null)[][] = Array.from({ length: QR_SIZE }, () =>
-    Array<boolean | null>(QR_SIZE).fill(null)
-  );
-
-  // 7×7 finder pattern plus its white separator ring.
-  const placeFinder = (row: number, col: number) => {
-    for (let r = -1; r <= 7; r += 1) {
-      for (let c = -1; c <= 7; c += 1) {
-        const rr = row + r;
-        const cc = col + c;
-        if (rr < 0 || cc < 0 || rr >= QR_SIZE || cc >= QR_SIZE) continue;
-        const inOuter = r >= 0 && r <= 6 && c >= 0 && c <= 6;
-        const onRing = r === 0 || r === 6 || c === 0 || c === 6;
-        const inCore = r >= 2 && r <= 4 && c >= 2 && c <= 4;
-        cells[rr]![cc] = inOuter ? onRing || inCore : false;
-      }
-    }
-  };
-  placeFinder(0, 0);
-  placeFinder(0, QR_SIZE - 7);
-  placeFinder(QR_SIZE - 7, 0);
-
-  // Timing patterns.
-  for (let i = 8; i < QR_SIZE - 8; i += 1) {
-    cells[6]![i] = i % 2 === 0;
-    cells[i]![6] = i % 2 === 0;
-  }
-
-  // Bottom-right 5×5 alignment pattern (dark ring, dark core).
-  const center = QR_SIZE - 7;
-  for (let r = -2; r <= 2; r += 1) {
-    for (let c = -2; c <= 2; c += 1) {
-      const ring = Math.max(Math.abs(r), Math.abs(c));
-      cells[center + r]![center + c] = ring !== 1;
-    }
-  }
-
-  // Everything else: data modules seeded by the session token.
-  const rand = mulberry32(hashToken(token));
-  for (let r = 0; r < QR_SIZE; r += 1) {
-    for (let c = 0; c < QR_SIZE; c += 1) {
-      if (cells[r]![c] === null) cells[r]![c] = rand() < 0.5;
-    }
-  }
-
-  return cells as Matrix;
-};
-
-const matrixToPath = (matrix: Matrix): string => {
   let path = "";
-  for (let r = 0; r < QR_SIZE; r += 1) {
-    for (let c = 0; c < QR_SIZE; c += 1) {
-      if (matrix[r]![c]) path += `M${c},${r}h1v1h-1z`;
+  for (let r = 0; r < size; r += 1) {
+    for (let c = 0; c < size; c += 1) {
+      if (data[r * size + c]) path += `M${c},${r}h1v1h-1z`;
     }
   }
-  return path;
+  return { path, size };
 };
 
 const QrLogin = ({ onBack }: QrLoginProps) => {
-  const [token, setToken] = useState<string | null>(null);
-  const [generating, setGenerating] = useState<boolean>(false);
-  const revealTimeoutRef = useRef<number | null>(null);
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const { token, phase, auth } = useQrSession();
 
-  // Token is only ever minted on the client so SSR markup stays stable.
+  // Phone approved the code → persist the session and enter the app.
   useEffect(() => {
-    setToken(randomToken());
+    if (phase === "approved" && auth) {
+      dispatch(
+        loginSuccess({ token: auth.token, user: auth.user, rememberMe: true })
+      );
+      router.replace(ROUTES.DASHBOARD);
+    }
+  }, [phase, auth, dispatch, router]);
 
-    const interval = window.setInterval(() => {
-      setGenerating(true);
-      revealTimeoutRef.current = window.setTimeout(() => {
-        setToken(randomToken());
-        setGenerating(false);
-      }, GENERATING_MS);
-    }, REFRESH_INTERVAL_MS);
+  // Blur/shimmer whenever the code isn't a live, scannable one.
+  const busy = phase !== "ready";
 
-    return () => {
-      window.clearInterval(interval);
-      if (revealTimeoutRef.current !== null) {
-        window.clearTimeout(revealTimeoutRef.current);
-      }
-    };
-  }, []);
-
-  const path = useMemo(
-    () => (token ? matrixToPath(buildMatrix(token)) : ""),
+  const { path, size } = useMemo(
+    () => (token ? buildQr(linkFor(token)) : { path: "", size: 29 }),
     [token]
   );
 
@@ -143,14 +75,14 @@ const QrLogin = ({ onBack }: QrLoginProps) => {
         <div
           className={classNames(
             styles.qrHolder,
-            (generating || !token) && styles.generating
+            (busy || !token) && styles.generating
           )}
           role="img"
           aria-label="QR code — scan with the Swipeo app to sign in"
         >
           <svg
             className={styles.qrSvg}
-            viewBox={`0 0 ${QR_SIZE} ${QR_SIZE}`}
+            viewBox={`0 0 ${size} ${size}`}
             shapeRendering="crispEdges"
             aria-hidden="true"
           >
@@ -171,18 +103,24 @@ const QrLogin = ({ onBack }: QrLoginProps) => {
         </div>
       </div>
 
-      {/* Only shown while a code is being minted; stays in the layout
-          (visibility) so the steps below never jump on refresh. */}
+      {/* Reflects the session phase; kept in the layout (visibility) so the
+          steps below never jump when the message toggles. */}
       <p
         className={classNames(
           styles.status,
-          styles.statusGenerating,
-          !generating && token && styles.statusHidden
+          phase === "error" ? styles.statusError : styles.statusGenerating,
+          phase === "ready" && styles.statusHidden
         )}
         role="status"
       >
-        <span className={styles.statusSpinner} />
-        Generating a fresh code…
+        {phase !== "error" && <span className={styles.statusSpinner} />}
+        {phase === "approved"
+          ? "Signing you in…"
+          : phase === "refreshing"
+          ? "Refreshing the code…"
+          : phase === "error"
+          ? "Couldn’t reach Swipeo — try email instead."
+          : "Generating a fresh code…"}
       </p>
 
       <ol className={styles.steps}>

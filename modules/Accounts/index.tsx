@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Loader from "@/Components/Loader";
+import { Account } from "@/modules/Accounts/types";
 import { getAccounts } from "@/services/accounts.service";
-import { Account } from "@/types/global";
 import AccountsSummary from "./components/AccountsSummary";
 import AccountCard from "./components/AccountCard";
 import styles from "./Accounts.module.scss";

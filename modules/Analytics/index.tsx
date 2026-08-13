@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Loader from "@/Components/Loader";
+import { AnalyticsSummary } from "@/modules/Analytics/types";
 import { getAnalyticsSummary } from "@/services/analytics.service";
-import { AnalyticsSummary } from "@/types/global";
 import SummaryTiles from "./components/SummaryTiles";
 import CategoryBreakdown from "./components/CategoryBreakdown";
 import MonthlyComparison from "./components/MonthlyComparison";

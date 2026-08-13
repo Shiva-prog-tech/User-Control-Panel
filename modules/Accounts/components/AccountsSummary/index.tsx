@@ -1,6 +1,6 @@
 "use client";
 
-import { Account } from "@/types/global";
+import { Account } from "@/modules/Accounts/types";
 import { formatCurrency } from "@/utils/helper";
 import styles from "./AccountsSummary.module.scss";
 

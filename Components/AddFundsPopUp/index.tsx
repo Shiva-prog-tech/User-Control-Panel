@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import Button from "@/Components/Button";
 import Loader from "@/Components/Loader";
 import PopUpWrapper from "@/Components/PopUpWrapper";
+import { Account } from "@/modules/Accounts/types";
 import { useAppDispatch } from "@/redux/hooks";
 import { hidePopUp } from "@/redux/reducers/PopUpsReducer";
 import { getAccounts } from "@/services/accounts.service";
-import { addFunds, AddFundsPayload } from "@/services/transfers.service";
+import { AddFundsPayload, addFunds } from "@/services/transfers.service";
 import { POPUPS } from "@/types/constants";
-import { Account } from "@/types/global";
 import { classNames, formatCurrency } from "@/utils/helper";
 import styles from "./AddFundsPopUp.module.scss";
 

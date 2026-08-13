@@ -7,14 +7,11 @@ import LivePill from "@/Components/LivePill";
 import Loader from "@/Components/Loader";
 import TiltCard from "@/Components/TiltCard";
 import CardControls from "@/modules/Cards/components/CardControls";
+import { CardModel, CardStatus } from "@/modules/Cards/types";
+import { Transaction, TransactionType } from "@/modules/Transactions/types";
 import { getCardById } from "@/services/cards.service";
 import { getTransactions } from "@/services/transactions.service";
-import {
-  CardStatus,
-  ROUTES,
-  TransactionType,
-} from "@/types/constants";
-import { CardModel, Transaction } from "@/types/global";
+import { ROUTES } from "@/types/constants";
 import { classNames, formatCurrency, maskCardNumber } from "@/utils/helper";
 import ActivityTable from "./components/ActivityTable";
 import FlipCard from "./components/FlipCard";
